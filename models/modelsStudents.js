@@ -1,4 +1,4 @@
-class students{
+class Students{
     constructor(matricule, nom, prenom, age, classe){
         this.matricule = matricule;
         this.nom = nom;
@@ -7,4 +7,4 @@ class students{
         this.classe = classe;
     }
 }
-export default students
+export default Students

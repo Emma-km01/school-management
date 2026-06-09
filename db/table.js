@@ -103,39 +103,3 @@ const insertAbsences = db.prepare(`
     VALUES(?, ?, ?)
     
 `);
-
-// 3. EXÉCUTION / INSERTION DES DONNÉES
-
-// Ajout des USERS (Administrateurs / Staff)
-insertUsers.run("Françoise Estelle", "admin", "12345");
-insertUsers.run("Hélène Koffi", "enseignante", "234567@");
-insertUsers.run("Allo Christ", "étudiant", "786990#");
-
-// Ajout des ÉTUDIANTS00
-insertStudents.run("MAT-0001", "Soumahoro", "Kakou", 14, "4ème");
-insertStudents.run("MAT-0002", "Dalla", "Aïcha", 16, "1ère D");
-insertStudents.run("MAT-0003", "Koffi", "Luc", 17, "3ème");
-
-// Ajout des PROFESSEURS
-insertTeachers.run("M. Chèvre", "Mathématiques");
-insertTeachers.run("Mme. Papou", "Français");
-insertTeachers.run("M. Yapi", "P-C");
-
-// Ajout des MATIÈRES
-insertSubjects.run("Mathématiques", 1);
-insertSubjects.run("Français", 2);
-insertSubjects.run("P-C", 3);
-
-//Ajout des NOTES
-insertGrades.run(1, 3, 18.71);
-insertGrades.run(2, 1, 9.26);
-insertGrades.run(2, 3, 13);
-insertGrades.run(3, 2, 15);
-
-//Ajout des ABSENCES
-insertAbsences.run(1, nowDate, "Non justifié")
-insertAbsences.run(2, nowDate, "Justifié")
-insertAbsences.run(3, nowDate, "Justifié")
-
-
-console.log("Les données ont été ajoutées avec succès !");
