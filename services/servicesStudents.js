@@ -2,7 +2,7 @@ import db from "../db/database.js";
 import Students from "../models/modelsStudents.js";
 
 
-function ajouter(matricule, nom, prenom, age, classe){
+function ajouterStudents(matricule, nom, prenom, age, classe){
 
     const addStudents = new Students(matricule, nom, prenom, age, classe);
 
@@ -11,20 +11,24 @@ function ajouter(matricule, nom, prenom, age, classe){
         VALUES (?, ?, ?, ?, ?)
     `);
 
-    ajout.run(insertStudents.matricule, insertStudents.nom, insertStudents.prenom, insertStudents.age, insertStudents.classe);
+   return ajout.run(addStudents.matricule, addStudents.nom, addStudents.prenom, addStudents.age, addStudents.classe);
 
     
 }
 
- ajouter("13498676h", "zahui", "keline", 27, "TD3")
-
-export default {ajouter}
 
 
-function supprimer(id){
-    const delStudents = new Students (id)
 
-    const supp = db.prepare(`
-        
-    `)
+
+
+function supprimerStudents(id){
+    return db.prepare(`
+        DELETE FROM students WHERE id = ?
+    `).run(id)
 }
+
+
+
+
+export {ajouterStudents, supprimerStudents}
+

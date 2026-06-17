@@ -103,3 +103,5 @@ const insertAbsences = db.prepare(`
     VALUES(?, ?, ?)
     
 `);
+
+supprimerStudents(26)
