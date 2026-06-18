@@ -17,8 +17,14 @@ function ajouterStudents(matricule, nom, prenom, age, classe){
 }
 
 
+function modifierStudents(id,data){
 
+    const updateStudents =  db.prepare(`
+        UPDATE students SET matricule = ?, nom = ?, prenom = ?, age = ?, classe = ?
+    `);
 
+    return updateStudents.run(data.matricule, data.nom, data.prenom, data.age, data.classe)
+}
 
 
 function supprimerStudents(id){
@@ -28,7 +34,17 @@ function supprimerStudents(id){
 }
 
 
+function rechercherStudents(id){
+    return db.prepare(`
+        SELECT * FROM students WHERE id = ?
+    `).get(id)
+}
 
+function listerStudents(){
+    return db.prepare(`
+        SELECT * FROM students
+    `).all()
+}
 
-export {ajouterStudents, supprimerStudents}
+export {ajouterStudents, modifierStudents, supprimerStudents}
 
