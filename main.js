@@ -1,10 +1,4 @@
-import db from "./db/database.js";
-
-import {ajouterStudents, supprimerStudents } from "./services/servicesStudents.js";
+import { menuPrincipal } from "./config/menuPrincipal.js";
 
 
-
-
-ajouterStudents("13498676h", "zahui", "keline", 15, "TD3")
-supprimerStudents(25);
-  
+menuPrincipal();

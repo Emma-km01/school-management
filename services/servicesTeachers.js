@@ -1,46 +1,38 @@
 import db from "../db/database.js";
 import Teachers from "../models/modelsTeachers.js";
 
+function ajouterTeachers(nom, matiere, user_id = null) {
+    const addTeachers = new Teachers(nom, matiere, user_id);
 
-function ajouterTeachers(nom, matiere){
-
-    const addTeachers = new Teachers(nom, matiere);
-
-    const ajoutTeachers = db.prepare(`
-        INSERT OR IGNORE INTO teachers(nom, matiere)
-        VALUES (?, ?)
-    `)
-
-    return ajoutTeachers.run(addTeachers.nom, addTeachers.matiere)
-}
-
-
-function modifierTeachers(id,data){
-
-    const updateTeachers =  db.prepare(`
-        UPDATE teachers SET nom = ?, matiere = ?
-    `);
-
-    return updateTeachers.run(data.nom, data.matiere)
-}
-
-
-function supprimerTeachers(id){
     return db.prepare(`
-        DELETE FROM Teachers WHERE id = ?
-    `).run(id)
+        INSERT OR IGNORE INTO teachers(nom, matiere, user_id)
+        VALUES (?, ?, ?)
+    `).run(addTeachers.nom, addTeachers.matiere, addTeachers.user_id);
 }
 
+function modifierTeachers(id, data) {
+    return db.prepare(`
+        UPDATE teachers SET nom = ?, matiere = ?
+        WHERE id = ?
+    `).run(data.nom, data.matiere, id); // ✅ WHERE id = ? ajouté
+}
 
-function rechercherTeachers(id){
+function supprimerTeachers(id) {
+    return db.prepare(`
+        DELETE FROM teachers WHERE id = ?  -- ✅ minuscules
+    `).run(id);
+}
+
+function rechercherTeachers(id) {
     return db.prepare(`
         SELECT * FROM teachers WHERE id = ?
-    `).get(id)
+    `).get(id);
 }
 
-
-function listerTeachers(){
+function listerTeachers() {
     return db.prepare(`
         SELECT * FROM teachers
-    `).all()
+    `).all();
 }
+
+export { ajouterTeachers, modifierTeachers, supprimerTeachers, rechercherTeachers, listerTeachers };

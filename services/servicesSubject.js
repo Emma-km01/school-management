@@ -1,42 +1,37 @@
 import db from "../db/database.js";
-import Students from "../models/modelsSubjects.js";
+import Subjects from "../models/modelsSubjects.js";
 
+function ajouterSubjects(nom, teacher_id = null) {
+    const addSubjects = new Subjects(nom, teacher_id);
 
-function ajouterSubjects(nom){
-
-    const addUsers = new Subjects(nom);
-
-    const ajout = db.prepare(`
-        INSERT OR IGNORE INTO users(nom)
+    return db.prepare(`
+        INSERT OR IGNORE INTO subjects(nom, teacher_id)
         VALUES (?, ?)
-    `);
-
-   return ajout.run(addUsers.nom);
-
-    
+    `).run(addSubjects.nom, addSubjects.teacher_id); // ✅ teacher_id et non teacherId
 }
 
-function affecterSubjects(subjectId, teacherId){
-
-    const affect = db.prepare(`
+function affecterSubjects(subjectId, teacherId) {
+    return db.prepare(`
         UPDATE subjects SET teacher_id = ? WHERE id = ?
-    `);
-    return affect.run(teacherId, subjectId)
-
+    `).run(teacherId, subjectId);
 }
 
-function supprimerSubjects(id){
+function modifierSubjects(id, nouveauNom, teacher_id) {
     return db.prepare(`
-        DELETE FROM users WHERE id = ?
-    `).run(id)
+        UPDATE subjects SET nom = ?, teacher_id = ? WHERE id = ?
+    `).run(nouveauNom, teacher_id, id);
 }
 
-
-function listerSubjects(){
+function supprimerSubjects(id) {
     return db.prepare(`
-        SELECT * FROM users
-    `).all()
+        DELETE FROM subjects WHERE id = ?
+    `).run(id);
 }
 
-export {ajouterSubjects, supprimerSubjects, listerSubjects}
+function listerSubjects() {
+    return db.prepare(`
+        SELECT * FROM subjects
+    `).all();
+}
 
+export { ajouterSubjects, affecterSubjects, modifierSubjects, supprimerSubjects, listerSubjects };
