@@ -1,8 +1,8 @@
 import { poserQuestion, rl } from "./interface.js";
 import { verifierConnexion } from "./connexion.js";
 import { menuAdmin } from "./menu/menuAdmin.js";
-import { menuTeacher } from "./menu/menuTeacher.js";
-import { menuStudent } from "./menu/menuStudent.js";
+import { menuTeacher } from "./menu/menuTeachers.js";
+import { menuStudent } from "./menu/menuStudents.js";
 
 async function menuPrincipal() {
     console.clear();
