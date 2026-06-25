@@ -79,7 +79,7 @@ async function menuTeacher() {
             break;
 
         default:
-            console.log("\n❌ Option invalide.");
+            console.log("\n Option invalide.");
             await poserQuestion("\nAppuyez sur Entrée pour continuer...");
             await menuTeacher();
     }

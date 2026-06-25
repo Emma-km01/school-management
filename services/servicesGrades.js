@@ -48,7 +48,7 @@ function listerGrades() {
     `).all();
 }
 
-// 5. Calculer la moyenne d'un étudiant pour une matière ✅
+// 5. Calculer la moyenne d'un étudiant pour une matière 
 function calculerGrades(student_id, subject_id) {
     return db.prepare(`
         SELECT AVG(note) AS moyenne

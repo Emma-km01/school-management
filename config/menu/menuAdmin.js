@@ -72,7 +72,7 @@ async function sousMenuUtilisateurs() {
             console.table(listerUsers());
             await poserQuestion("\nAppuyez sur Entrée...");
             await sousMenuUtilisateurs();
-            break;
+            break; 
         case '2':
             const name = await poserQuestion("Nom : ");
             const role = await poserQuestion("Rôle (admin/teacher/student) : ");
@@ -280,22 +280,28 @@ async function sousMenuNotes() {
             const subjectId = await poserQuestion("ID Matière : ");
             const note = await poserQuestion("Note (0-20) : ");
             ajouterGrades(parseInt(studentId), parseInt(subjectId), parseFloat(note));
-            console.log("\n✔️ Note ajoutée !");
+            console.log("\n Note ajoutée !");
             await poserQuestion("\nAppuyez sur Entrée...");
             await sousMenuNotes();
             break;
         case '3':
             const idModif = await poserQuestion("ID de la note à modifier : ");
+            const newStudentId = await poserQuestion("Nouvel ID Étudiant : ");
+            const newSubjectId = await poserQuestion("Nouvel ID Matière : ");
             const newNote = await poserQuestion("Nouvelle note (0-20) : ");
-            modifierGrades(parseInt(idModif), { note: parseFloat(newNote) });
-            console.log("\n✔️ Note mise à jour !");
+            modifierGrades(parseInt(idModif), {
+            student_id: parseInt(newStudentId),
+            subject_id: parseInt(newSubjectId),
+            note: parseFloat(newNote)
+        });
+            console.log("\n Note mise à jour !");
             await poserQuestion("\nAppuyez sur Entrée...");
             await sousMenuNotes();
             break;
         case '4':
             const idSupp = await poserQuestion("ID de la note à supprimer : ");
             supprimerGrades(parseInt(idSupp));
-            console.log("\n✔️ Note supprimée !");
+            console.log("\n Note supprimée !");
             await poserQuestion("\nAppuyez sur Entrée...");
             await sousMenuNotes();
             break;

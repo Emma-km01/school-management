@@ -3,22 +3,22 @@ import { listerUsers } from "../services/servicesUsers.js";
 
 async function verifierConnexion() {
     console.log("\n--- CONNEXION REQUISE ---");
-    const identifiant = await poserQuestion("Identifiant (Nom) : ");
+    const identifiant = await poserQuestion("Identifiant : ");
     const motDePasse = await poserQuestion("Mot de passe : ");
 
-    // ✅ Récupération des utilisateurs depuis le service
+    // Récupération des utilisateurs depuis le service
     const users = listerUsers();
     
-    // ✔️ CORRECTION : On compare maintenant avec u.name au lieu de u.username
+    // CORRECTION : On compare maintenant avec u.name au lieu de u.username
     const user = users.find(
-        (u) => u.name === identifiant && u.motdepasse === motDePasse
+        (u) => u.username === identifiant && u.motdepasse === motDePasse
     );
 
     if (user) {
-        console.log(`\n✔️ Connexion réussie en tant que ${user.name} (${user.role})`);
+        console.log(`\n Connexion réussie en tant que ${user.name} (${user.role})`);
         return user.role; // Renvoie "admin", "teacher" ou "student"
     } else {
-        console.log("\n❌ Identifiant ou mot de passe incorrect.");
+        console.log("\n Identifiant ou mot de passe incorrect.");
         return null;
     }
 }

@@ -32,11 +32,11 @@ async function menuPrincipal() {
                         await menuStudent();
                         break;
                     default:
-                        console.log("\n❌ Rôle inconnu, retour au menu.");
+                        console.log("\n Rôle inconnu, retour au menu.");
                         await menuPrincipal();
                 }
             } else {
-                // ✅ Message + pause avant de retourner au menu (évite boucle silencieuse)
+                // Message + pause avant de retourner au menu (évite boucle silencieuse)
                 await poserQuestion("\nAppuyez sur Entrée pour réessayer...");
                 await menuPrincipal();
             }
@@ -48,7 +48,7 @@ async function menuPrincipal() {
             process.exit(0);
 
         default:
-            console.log("\n❌ Option invalide.");
+            console.log("\n Option invalide.");
             await poserQuestion("\nAppuyez sur Entrée pour continuer...");
             await menuPrincipal();
     }

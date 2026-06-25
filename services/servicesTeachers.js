@@ -14,12 +14,12 @@ function modifierTeachers(id, data) {
     return db.prepare(`
         UPDATE teachers SET nom = ?, matiere = ?
         WHERE id = ?
-    `).run(data.nom, data.matiere, id); // ✅ WHERE id = ? ajouté
+    `).run(data.nom, data.matiere, id); // WHERE id = ? ajouté
 }
 
 function supprimerTeachers(id) {
     return db.prepare(`
-        DELETE FROM teachers WHERE id = ?  -- ✅ minuscules
+        DELETE FROM teachers WHERE id = ?
     `).run(id);
 }
 
