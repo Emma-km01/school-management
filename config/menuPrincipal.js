@@ -3,6 +3,7 @@ import { verifierConnexion } from "./connexion.js";
 import { menuAdmin } from "./menu/menuAdmin.js";
 import { menuTeacher } from "./menu/menuTeachers.js";
 import { menuStudent } from "./menu/menuStudents.js";
+import logger from "../utils/logger.js";
 
 async function menuPrincipal() {
     console.clear();
@@ -23,31 +24,35 @@ async function menuPrincipal() {
                 await poserQuestion("\nAppuyez sur Entrée pour continuer...");
                 switch (role) {
                     case "admin":
+                        logger.info("Accès espace administrateur");
                         await menuAdmin();
                         break;
                     case "teacher":
+                        logger.info("Accès espace enseignant");
                         await menuTeacher();
                         break;
                     case "student":
+                        logger.info("Accès espace étudiant");
                         await menuStudent();
                         break;
                     default:
-                        console.log("\n Rôle inconnu, retour au menu.");
+                        logger.warning(`Rôle inconnu : ${role}`);
                         await menuPrincipal();
                 }
             } else {
-                // Message + pause avant de retourner au menu (évite boucle silencieuse)
                 await poserQuestion("\nAppuyez sur Entrée pour réessayer...");
                 await menuPrincipal();
             }
             break;
 
         case '2':
+            logger.info("Fermeture du programme");
             console.log("\nAu revoir !");
             rl.close();
             process.exit(0);
 
         default:
+            logger.warning(`Option invalide saisie : "${choix}" dans menuPrincipal`);
             console.log("\n Option invalide.");
             await poserQuestion("\nAppuyez sur Entrée pour continuer...");
             await menuPrincipal();

@@ -7,7 +7,7 @@ function ajouterSubjects(nom, teacher_id = null) {
     return db.prepare(`
         INSERT OR IGNORE INTO subjects(nom, teacher_id)
         VALUES (?, ?)
-    `).run(addSubjects.nom, addSubjects.teacher_id); // ✅ teacher_id et non teacherId
+    `).run(addSubjects.nom, addSubjects.teacher_id); // teacher_id et non teacherId
 }
 
 function affecterSubjects(subjectId, teacherId) {

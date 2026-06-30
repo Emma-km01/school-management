@@ -6,6 +6,7 @@ import { ajouterSubjects, modifierSubjects, supprimerSubjects, listerSubjects } 
 import { ajouterGrades, modifierGrades, supprimerGrades, listerGrades } from "../../services/servicesGrades.js";
 import { afficherAbsences } from "../../services/servicesAbsences.js";
 import { ajouterUsers, modifierUsers, supprimerUsers, listerUsers } from "../../services/servicesUsers.js";
+import logger from "../../utils/logger.js";
 
 async function menuAdmin() {
     console.clear();
@@ -15,10 +16,8 @@ async function menuAdmin() {
     console.log("1. Gérer les Utilisateurs");
     console.log("2. Gérer les Étudiants");
     console.log("3. Gérer les Professeurs");
-    console.log("4. Gérer les Matières");
-    console.log("5. Gérer les Notes");
-    console.log("6. Gérer les Absences");
-    console.log("7. Déconnexion");
+    console.log("4. Gestion Académique (Matières, Notes, Absences)");
+    console.log("5. Déconnexion");
     console.log("=========================================");
 
     const choix = await poserQuestion("Choisissez une option : ");
@@ -34,28 +33,23 @@ async function menuAdmin() {
             await sousMenuProfesseurs();
             break;
         case '4':
-            await sousMenuMatieres();
+            await sousMenuAcademique();
             break;
         case '5':
-            await sousMenuNotes();
-            break;
-        case '6':
-            await sousMenuAbsences();
-            break;
-        case '7':
+            logger.info("Déconnexion de l'administrateur");
             console.log("\nDéconnexion réussie.");
             await menuPrincipal();
             break;
         default:
-            console.log("\n❌ Option invalide.");
+            logger.warning(`Option invalide dans menuAdmin : "${choix}"`);
+            console.log("\n Option invalide.");
             await poserQuestion("\nAppuyez sur Entrée pour continuer...");
             await menuAdmin();
     }
 }
 
-// =========================================================================
-// SOUS-MENUS
-// =========================================================================
+
+// SOUS-MENU UTILISATEURS
 
 async function sousMenuUtilisateurs() {
     console.clear();
@@ -69,45 +63,58 @@ async function sousMenuUtilisateurs() {
     const choix = await poserQuestion("\nChoisissez une option : ");
     switch (choix) {
         case '1':
-            console.table(listerUsers());
             await poserQuestion("\nAppuyez sur Entrée...");
             await sousMenuUtilisateurs();
-            break; 
-        case '2':
+            break;
+        case '2': {
+
+            console.table(listerUsers());
             const name = await poserQuestion("Nom : ");
             const role = await poserQuestion("Rôle (admin/teacher/student) : ");
             const username = await poserQuestion("Identifiant : ");
             const motdepasse = await poserQuestion("Mot de passe : ");
             ajouterUsers(name, role, username, motdepasse);
-            console.log("\n✔️ Utilisateur ajouté !");
+            logger.info(`Utilisateur ajouté : ${name} (${role})`);
+            console.log("\n Utilisateur ajouté !");
             await poserQuestion("\nAppuyez sur Entrée...");
             await sousMenuUtilisateurs();
             break;
-        case '3':
+        }
+        case '3': {
+            console.table(listerUsers()); 
             const idModif = await poserQuestion("ID de l'utilisateur à modifier : ");
             const newName = await poserQuestion("Nouveau nom : ");
             const newRole = await poserQuestion("Nouveau rôle : ");
             const newUsername = await poserQuestion("Nouvel identifiant : ");
             const newMdp = await poserQuestion("Nouveau mot de passe : ");
             modifierUsers(parseInt(idModif), { name: newName, role: newRole, username: newUsername, motdepasse: newMdp });
-            console.log("\n✔️ Utilisateur mis à jour !");
+            logger.info(`Utilisateur modifié : ID ${idModif}`);
+            console.log("\n Utilisateur mis à jour !");
             await poserQuestion("\nAppuyez sur Entrée...");
             await sousMenuUtilisateurs();
             break;
-        case '4':
+        }
+        case '4': {
+            console.table(listerUsers());
             const idSupp = await poserQuestion("ID de l'utilisateur à supprimer : ");
             supprimerUsers(parseInt(idSupp));
-            console.log("\n✔️ Utilisateur supprimé !");
+            logger.info(`Utilisateur supprimé : ID ${idSupp}`);
+            console.log("\n Utilisateur supprimé !");
             await poserQuestion("\nAppuyez sur Entrée...");
             await sousMenuUtilisateurs();
             break;
+        }
         case '5':
             await menuAdmin();
             break;
         default:
+            logger.warning(`Option invalide dans sousMenuUtilisateurs : "${choix}"`);
             await sousMenuUtilisateurs();
     }
 }
+
+
+// SOUS-MENU ÉTUDIANTS
 
 async function sousMenuEtudiants() {
     console.clear();
@@ -121,22 +128,25 @@ async function sousMenuEtudiants() {
     const choix = await poserQuestion("\nChoisissez une option : ");
     switch (choix) {
         case '1':
-            console.table(listerStudents());
             await poserQuestion("\nAppuyez sur Entrée...");
             await sousMenuEtudiants();
             break;
-        case '2':
+        case '2': {
+            console.table(listerStudents());
             const matricule = await poserQuestion("Matricule : ");
             const nom = await poserQuestion("Nom : ");
             const prenom = await poserQuestion("Prénom : ");
             const age = await poserQuestion("Âge : ");
             const classe = await poserQuestion("Classe : ");
             ajouterStudents(matricule, nom, prenom, parseInt(age), classe);
-            console.log("\n✔️ Étudiant ajouté !");
+            logger.info(`Étudiant ajouté : ${nom} ${prenom} (matricule ${matricule})`);
+            console.log("\n Étudiant ajouté !");
             await poserQuestion("\nAppuyez sur Entrée...");
             await sousMenuEtudiants();
             break;
-        case '3':
+        }
+        case '3': {
+            console.table(listerStudents());
             const idModif = await poserQuestion("ID de l'étudiant à modifier : ");
             const newMatricule = await poserQuestion("Nouveau matricule : ");
             const newNom = await poserQuestion("Nouveau nom : ");
@@ -144,24 +154,33 @@ async function sousMenuEtudiants() {
             const newAge = await poserQuestion("Nouvel âge : ");
             const newClasse = await poserQuestion("Nouvelle classe : ");
             modifierStudents(parseInt(idModif), { matricule: newMatricule, nom: newNom, prenom: newPrenom, age: parseInt(newAge), classe: newClasse });
-            console.log("\n✔️ Étudiant mis à jour !");
+            logger.info(`Étudiant modifié : ID ${idModif}`);
+            console.log("\n Étudiant mis à jour !");
             await poserQuestion("\nAppuyez sur Entrée...");
             await sousMenuEtudiants();
             break;
-        case '4':
+        }
+        case '4': {
+            console.table(listerStudents());
             const idSupp = await poserQuestion("ID de l'étudiant à supprimer : ");
             supprimerStudents(parseInt(idSupp));
-            console.log("\n✔️ Étudiant supprimé !");
+            logger.info(`Étudiant supprimé : ID ${idSupp}`);
+            console.log("\n Étudiant supprimé !");
             await poserQuestion("\nAppuyez sur Entrée...");
             await sousMenuEtudiants();
             break;
+        }
         case '5':
             await menuAdmin();
             break;
         default:
+            logger.warning(`Option invalide dans sousMenuEtudiants : "${choix}"`);
             await sousMenuEtudiants();
     }
 }
+
+
+// SOUS-MENU PROFESSEURS
 
 async function sousMenuProfesseurs() {
     console.clear();
@@ -175,41 +194,83 @@ async function sousMenuProfesseurs() {
     const choix = await poserQuestion("\nChoisissez une option : ");
     switch (choix) {
         case '1':
-            console.table(listerTeachers());
             await poserQuestion("\nAppuyez sur Entrée...");
             await sousMenuProfesseurs();
             break;
-        case '2':
+        case '2': {
+            console.table(listerTeachers());
             const nom = await poserQuestion("Nom : ");
             const matiere = await poserQuestion("Matière : ");
             ajouterTeachers(nom, matiere);
-            console.log("\n✔️ Professeur ajouté !");
+            logger.info(`Professeur ajouté : ${nom} (${matiere})`);
+            console.log("\n Professeur ajouté !");
             await poserQuestion("\nAppuyez sur Entrée...");
             await sousMenuProfesseurs();
             break;
-        case '3':
+        }
+        case '3': {
+            console.table(listerTeachers());
             const idModif = await poserQuestion("ID du professeur à modifier : ");
             const newNom = await poserQuestion("Nouveau nom : ");
             const newMatiere = await poserQuestion("Nouvelle matière : ");
             modifierTeachers(parseInt(idModif), { nom: newNom, matiere: newMatiere });
-            console.log("\n✔️ Professeur mis à jour !");
+            logger.info(`Professeur modifié : ID ${idModif}`);
+            console.log("\n Professeur mis à jour !");
             await poserQuestion("\nAppuyez sur Entrée...");
             await sousMenuProfesseurs();
             break;
-        case '4':
+        }
+        case '4': {
+            console.table(listerTeachers());
             const idSupp = await poserQuestion("ID du professeur à supprimer : ");
             supprimerTeachers(parseInt(idSupp));
-            console.log("\n✔️ Professeur supprimé !");
+            logger.info(`Professeur supprimé : ID ${idSupp}`);
+            console.log("\n Professeur supprimé !");
             await poserQuestion("\nAppuyez sur Entrée...");
             await sousMenuProfesseurs();
             break;
+        }
         case '5':
             await menuAdmin();
             break;
         default:
+            logger.warning(`Option invalide dans sousMenuProfesseurs : "${choix}"`);
             await sousMenuProfesseurs();
     }
 }
+
+// SOUS-MENU ACADÉMIQUE (regroupe Matières, Notes, Absences)
+
+async function sousMenuAcademique() {
+    console.clear();
+    console.log("--- GESTION ACADÉMIQUE ---");
+    console.log("1. Gérer les Matières");
+    console.log("2. Gérer les Notes");
+    console.log("3. Gérer les Absences");
+    console.log("4. Retour au menu admin");
+
+    const choix = await poserQuestion("\nChoisissez une option : ");
+    switch (choix) {
+        case '1':
+            await sousMenuMatieres();
+            break;
+        case '2':
+            await sousMenuNotes();
+            break;
+        case '3':
+            await sousMenuAbsences();
+            break;
+        case '4':
+            await menuAdmin();
+            break;
+        default:
+            logger.warning(`Option invalide dans sousMenuAcademique : "${choix}"`);
+            await sousMenuAcademique();
+    }
+}
+
+
+// SOUS-MENU MATIÈRES
 
 async function sousMenuMatieres() {
     console.clear();
@@ -223,41 +284,53 @@ async function sousMenuMatieres() {
     const choix = await poserQuestion("\nChoisissez une option : ");
     switch (choix) {
         case '1':
-            console.table(listerSubjects());
             await poserQuestion("\nAppuyez sur Entrée...");
             await sousMenuMatieres();
             break;
-        case '2':
+        case '2': {
+            console.table(listerSubjects());
             const nomMat = await poserQuestion("Nom de la matière : ");
             const idProf = await poserQuestion("ID Professeur (laisser vide si aucun) : ");
             ajouterSubjects(nomMat, idProf.trim() === "" ? null : parseInt(idProf));
-            console.log("\n✔️ Matière ajoutée !");
+            logger.info(`Matière ajoutée : ${nomMat}`);
+            console.log("\n Matière ajoutée !");
             await poserQuestion("\nAppuyez sur Entrée...");
             await sousMenuMatieres();
             break;
-        case '3':
+        }
+        case '3': {
+            console.table(listerSubjects());
             const idModif = await poserQuestion("ID de la matière : ");
             const newNom = await poserQuestion("Nouveau nom : ");
             const newIdProf = await poserQuestion("Nouvel ID Professeur : ");
             modifierSubjects(parseInt(idModif), newNom, newIdProf.trim() === "" ? null : parseInt(newIdProf));
-            console.log("\n✔️ Matière mise à jour !");
+            logger.info(`Matière modifiée : ID ${idModif}`);
+            console.log("\n Matière mise à jour !");
             await poserQuestion("\nAppuyez sur Entrée...");
             await sousMenuMatieres();
             break;
-        case '4':
+        }
+        case '4': {
+            console.table(listerSubjects());
             const idSupp = await poserQuestion("ID de la matière à supprimer : ");
             supprimerSubjects(parseInt(idSupp));
-            console.log("\n✔️ Matière supprimée !");
+            logger.info(`Matière supprimée : ID ${idSupp}`);
+            console.log("\n Matière supprimée !");
             await poserQuestion("\nAppuyez sur Entrée...");
             await sousMenuMatieres();
             break;
+        }
         case '5':
-            await menuAdmin();
+            await sousMenuAcademique(); // retour vers le sous-menu académique
             break;
         default:
+            logger.warning(`Option invalide dans sousMenuMatieres : "${choix}"`);
             await sousMenuMatieres();
     }
 }
+
+
+// SOUS-MENU NOTES
 
 async function sousMenuNotes() {
     console.clear();
@@ -271,47 +344,68 @@ async function sousMenuNotes() {
     const choix = await poserQuestion("\nChoisissez une option : ");
     switch (choix) {
         case '1':
-            console.table(listerGrades());
             await poserQuestion("\nAppuyez sur Entrée...");
             await sousMenuNotes();
             break;
-        case '2':
+        case '2': {
+            console.table(listerStudents());
+            console.table(listerSubjects());
             const studentId = await poserQuestion("ID Étudiant : ");
             const subjectId = await poserQuestion("ID Matière : ");
             const note = await poserQuestion("Note (0-20) : ");
-            ajouterGrades(parseInt(studentId), parseInt(subjectId), parseFloat(note));
-            console.log("\n Note ajoutée !");
+            const result = ajouterGrades(parseInt(studentId), parseInt(subjectId), parseFloat(note));
+            if (result === null) {
+                logger.warning(`Note invalide rejetée : ${note}`);
+            } else {
+                logger.info(`Note ajoutée : ${note} pour étudiant ID ${studentId}`);
+                console.log("\n Note ajoutée !");
+            }
             await poserQuestion("\nAppuyez sur Entrée...");
             await sousMenuNotes();
             break;
-        case '3':
+        }
+        case '3': {
+            console.table(listerGrades());
             const idModif = await poserQuestion("ID de la note à modifier : ");
             const newStudentId = await poserQuestion("Nouvel ID Étudiant : ");
             const newSubjectId = await poserQuestion("Nouvel ID Matière : ");
             const newNote = await poserQuestion("Nouvelle note (0-20) : ");
-            modifierGrades(parseInt(idModif), {
-            student_id: parseInt(newStudentId),
-            subject_id: parseInt(newSubjectId),
-            note: parseFloat(newNote)
-        });
-            console.log("\n Note mise à jour !");
+            const result = modifierGrades(parseInt(idModif), {
+                student_id: parseInt(newStudentId),
+                subject_id: parseInt(newSubjectId),
+                note: parseFloat(newNote)
+            });
+            if (result === null) {
+                logger.warning(`Note invalide rejetée lors de la modification : ${newNote}`);
+            } else {
+                logger.info(`Note modifiée : ID ${idModif}`);
+                console.log("\n Note mise à jour !");
+            }
             await poserQuestion("\nAppuyez sur Entrée...");
             await sousMenuNotes();
             break;
-        case '4':
+        }
+        case '4': {
+            console.table(listerGrades());
             const idSupp = await poserQuestion("ID de la note à supprimer : ");
             supprimerGrades(parseInt(idSupp));
+            logger.info(`Note supprimée : ID ${idSupp}`);
             console.log("\n Note supprimée !");
             await poserQuestion("\nAppuyez sur Entrée...");
             await sousMenuNotes();
             break;
+        }
         case '5':
-            await menuAdmin();
+            await sousMenuAcademique(); // retour vers le sous-menu académique
             break;
         default:
+            logger.warning(`Option invalide dans sousMenuNotes : "${choix}"`);
             await sousMenuNotes();
     }
 }
+
+
+// SOUS-MENU ABSENCES
 
 async function sousMenuAbsences() {
     console.clear();
@@ -321,17 +415,19 @@ async function sousMenuAbsences() {
 
     const choix = await poserQuestion("\nChoisissez une option : ");
     switch (choix) {
-        case '1':
-            const liste = afficherAbsences();
+        case '1': {
+            logger.info("Consultation des absences par l'administrateur");
             if (liste.length === 0) console.log("Aucune absence.");
             else console.table(liste);
             await poserQuestion("\nAppuyez sur Entrée...");
             await sousMenuAbsences();
             break;
+        }
         case '2':
-            await menuAdmin();
+            await sousMenuAcademique(); // retour vers le sous-menu académique
             break;
         default:
+            logger.warning(`Option invalide dans sousMenuAbsences : "${choix}"`);
             await sousMenuAbsences();
     }
 }

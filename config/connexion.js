@@ -1,23 +1,23 @@
 import { poserQuestion } from "./interface.js";
 import { listerUsers } from "../services/servicesUsers.js";
+import logger from "../utils/logger.js";
 
 async function verifierConnexion() {
     console.log("\n--- CONNEXION REQUISE ---");
     const identifiant = await poserQuestion("Identifiant : ");
     const motDePasse = await poserQuestion("Mot de passe : ");
 
-    // Récupération des utilisateurs depuis le service
     const users = listerUsers();
-    
-    // CORRECTION : On compare maintenant avec u.name au lieu de u.username
     const user = users.find(
         (u) => u.username === identifiant && u.motdepasse === motDePasse
     );
 
     if (user) {
+        logger.info(`Connexion réussie : ${user.name} (${user.role})`);
         console.log(`\n Connexion réussie en tant que ${user.name} (${user.role})`);
-        return user.role; // Renvoie "admin", "teacher" ou "student"
+        return user.role;
     } else {
+        logger.warning(`Tentative de connexion échouée : identifiant "${identifiant}"`);
         console.log("\n Identifiant ou mot de passe incorrect.");
         return null;
     }
