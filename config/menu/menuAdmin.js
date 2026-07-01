@@ -201,7 +201,8 @@ async function sousMenuProfesseurs() {
             console.table(listerTeachers());
             const nom = await poserQuestion("Nom : ");
             const matiere = await poserQuestion("Matière : ");
-            ajouterTeachers(nom, matiere);
+            const user_id = await poserQuestion("user_id")
+            ajouterTeachers(nom, matiere, user_id);
             logger.info(`Professeur ajouté : ${nom} (${matiere})`);
             console.log("\n Professeur ajouté !");
             await poserQuestion("\nAppuyez sur Entrée...");
@@ -213,6 +214,7 @@ async function sousMenuProfesseurs() {
             const idModif = await poserQuestion("ID du professeur à modifier : ");
             const newNom = await poserQuestion("Nouveau nom : ");
             const newMatiere = await poserQuestion("Nouvelle matière : ");
+            const user_id = await poserQuestion("user_id")
             modifierTeachers(parseInt(idModif), { nom: newNom, matiere: newMatiere });
             logger.info(`Professeur modifié : ID ${idModif}`);
             console.log("\n Professeur mis à jour !");
@@ -278,7 +280,7 @@ async function sousMenuMatieres() {
     console.log("1. Lister les matières");
     console.log("2. Ajouter une matière");
     console.log("3. Modifier une matière");
-    console.log("4. Supprimer une matière");
+    console.log("4. Supprimer une matière");1
     console.log("5. Retour");
 
     const choix = await poserQuestion("\nChoisissez une option : ");
