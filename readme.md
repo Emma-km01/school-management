@@ -44,32 +44,68 @@ L'accès est protégé par un système de connexion. Chaque utilisateur est redi
 school-management/
 ├── main.js               → Point d'entrée
 ├── seed.mjs              → Données de test
-├── db/                   → Connexion et création des tables SQLite
-├── models/               → Classes représentant les entités
-├── services/             → Logique métier (CRUD) pour chaque entité
+├── db/
+│   ├── database.js       → Connexion SQLite
+│   └── table.js          → Création des tables
+├── models/
+│   ├── modelsUsers.js
+│   ├── modelsStudents.js
+│   ├── modelsTeachers.js
+│   ├── modelsSubjects.js
+│   ├── modelsGrades.js
+│   └── modelsAbsences.js
+├── services/
+│   ├── servicesUsers.js
+│   ├── servicesStudents.js
+│   ├── servicesTeachers.js
+│   ├── servicesSubjects.js
+│   ├── servicesGrades.js
+│   ├── servicesAbsences.js
+│   └── servicesStatistiques.js
 ├── utils/
 │   └── logger.js         → Journalisation des actions
 ├── config/
 │   ├── interface.js      → Lecture des entrées clavier
 │   ├── connexion.js      → Vérification des identifiants
 │   ├── menuPrincipal.js  → Menu d'accueil
-│   └── menu/             → Menus par rôle (admin, enseignant, étudiant)
+│   └── menu/
+│       ├── menuAdmin.js      → Espace administrateur
+│       ├── menuTeacher.js    → Espace enseignant
+│       └── menuStudent.js    → Espace étudiant
 └── logs/
 └── app.log           → Historique de toutes les actions
 
 ## Fonctionnalités
 
-- **Utilisateurs** — Ajout, modification, suppression avec gestion des rôles
+### Administrateur
+- **Utilisateurs** — Ajout, modification, suppression avec gestion des rôles (admin, enseignant, étudiant)
 - **Étudiants** — CRUD complet (matricule, nom, prénom, âge, classe)
 - **Professeurs** — CRUD complet avec affectation aux matières
-- **Matières** — Création et affectation à un professeur
-- **Notes** — Ajout, modification, suppression et calcul de moyenne (0-20)
-- **Absences** — Enregistrement avec statut justifiée / non justifiée
-- **Statistiques** — Moyenne générale, classement des étudiants, comptage des absences
-- **Logs** — Toutes les actions sont horodatées et enregistrées dans `logs/app.log`
+- **Gestion Académique**
+  - *Matières* — Création et affectation à un professeur
+  - *Notes* — Ajout, modification, suppression (valeur entre 0 et 20)
+  - *Absences* — Consultation avec nom et prénom de l'étudiant
+- **Statistiques**
+  - Moyenne générale d'un étudiant
+  - Moyenne par matière d'un étudiant
+  - Nombre d'absences d'un étudiant
+  - Classement des étudiants par moyenne
+  - Statistiques globales (nb étudiants, enseignants, matières)
+
+### Enseignant
+- Consulter la liste des étudiants
+- Consulter les matières
+- Ajouter et modifier des notes
+- Consulter les absences
+
+### Étudiant
+- Consulter ses notes
+- Consulter ses absences
+- Consulter sa moyenne générale
 
 ## Format des logs
 
+Toutes les actions sont horodatées et enregistrées dans `logs/app.log` :
 2026-06-30 10:15:00 [INFO] Étudiant ajouté : Traoré Aminata (matricule STU001)
 2026-06-30 10:20:00 [WARNING] Note invalide rejetée : 25
 2026-06-30 10:30:00 [ERROR] Erreur base de données

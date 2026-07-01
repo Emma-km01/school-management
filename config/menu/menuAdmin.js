@@ -6,6 +6,7 @@ import { ajouterSubjects, modifierSubjects, supprimerSubjects, listerSubjects } 
 import { ajouterGrades, modifierGrades, supprimerGrades, listerGrades } from "../../services/servicesGrades.js";
 import { afficherAbsences } from "../../services/servicesAbsences.js";
 import { ajouterUsers, modifierUsers, supprimerUsers, listerUsers } from "../../services/servicesUsers.js";
+import { moyenneEtudiant, moyenneParMatiere, compterAbsencesEtudiant, classementEtudiants, statsGlobales } from "../../services/servicesStatistiques.js";
 import logger from "../../utils/logger.js";
 
 async function menuAdmin() {
@@ -17,7 +18,8 @@ async function menuAdmin() {
     console.log("2. Gérer les Étudiants");
     console.log("3. Gérer les Professeurs");
     console.log("4. Gestion Académique (Matières, Notes, Absences)");
-    console.log("5. Déconnexion");
+    console.log("5. Statistiques");
+    console.log("6. Déconnexion");
     console.log("=========================================");
 
     const choix = await poserQuestion("Choisissez une option : ");
@@ -36,6 +38,9 @@ async function menuAdmin() {
             await sousMenuAcademique();
             break;
         case '5':
+            await sousMenuStatistiques();
+            break;
+        case '6':
             logger.info("Déconnexion de l'administrateur");
             console.log("\nDéconnexion réussie.");
             await menuPrincipal();
@@ -431,6 +436,77 @@ async function sousMenuAbsences() {
         default:
             logger.warning(`Option invalide dans sousMenuAbsences : "${choix}"`);
             await sousMenuAbsences();
+    }
+}
+
+// SOUS-MENU STATISTIQUE
+
+async function sousMenuStatistiques() {
+    console.clear();
+    console.log("--- STATISTIQUES ---");
+    console.log("1. Moyenne générale d'un étudiant");
+    console.log("2. Moyenne par matière d'un étudiant");
+    console.log("3. Nombre d'absences d'un étudiant");
+    console.log("4. Classement des étudiants");
+    console.log("5. Statistiques globales");
+    console.log("6. Retour");
+
+    const choix = await poserQuestion("\nChoisissez une option : ");
+    switch (choix) {
+        case '1': {
+            const id = await poserQuestion("ID de l'étudiant : ");
+            const result = moyenneEtudiant(parseInt(id));
+            console.log(`\nMoyenne générale : ${result.moyenne ?? "Aucune note"}`);
+            logger.info(`Consultation moyenne générale étudiant ID ${id}`);
+            await poserQuestion("\nAppuyez sur Entrée...");
+            await sousMenuStatistiques();
+            break;
+        }
+        case '2': {
+            const id = await poserQuestion("ID de l'étudiant : ");
+            const result = moyenneParMatiere(parseInt(id));
+            if (result.length === 0) console.log("Aucune note enregistrée.");
+            else console.table(result);
+            logger.info(`Consultation moyenne par matière étudiant ID ${id}`);
+            await poserQuestion("\nAppuyez sur Entrée...");
+            await sousMenuStatistiques();
+            break;
+        }
+        case '3': {
+            const id = await poserQuestion("ID de l'étudiant : ");
+            const result = compterAbsencesEtudiant(parseInt(id));
+            console.log(`\nNombre d'absences : ${result.total_absences}`);
+            logger.info(`Consultation absences étudiant ID ${id}`);
+            await poserQuestion("\nAppuyez sur Entrée...");
+            await sousMenuStatistiques();
+            break;
+        }
+        case '4': {
+            const result = classementEtudiants();
+            if (result.length === 0) console.log("Aucun étudiant classé.");
+            else console.table(result);
+            logger.info("Consultation classement des étudiants");
+            await poserQuestion("\nAppuyez sur Entrée...");
+            await sousMenuStatistiques();
+            break;
+        }
+        case '5': {
+            const result = statsGlobales();
+            console.log("\n--- STATISTIQUES GLOBALES ---");
+            console.log(`Étudiants  : ${result.etudiants}`);
+            console.log(`Enseignants: ${result.enseignants}`);
+            console.log(`Matières   : ${result.matieres}`);
+            logger.info("Consultation des statistiques globales");
+            await poserQuestion("\nAppuyez sur Entrée...");
+            await sousMenuStatistiques();
+            break;
+        }
+        case '6':
+            await menuAdmin();
+            break;
+        default:
+            logger.warning(`Option invalide dans sousMenuStatistiques : "${choix}"`);
+            await sousMenuStatistiques();
     }
 }
 
