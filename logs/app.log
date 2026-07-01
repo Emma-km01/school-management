@@ -19,3 +19,10 @@
 2026-07-01 09:47:32 [INFO] Accès espace enseignant
 2026-07-01 09:48:27 [INFO] Connexion réussie : Yao Kouassi (student)
 2026-07-01 09:48:29 [INFO] Accès espace étudiant
+2026-07-01 14:53:04 [WARNING] Option invalide saisie : "" dans menuPrincipal
+2026-07-01 14:54:05 [INFO] Connexion réussie : Administrateur (admin)
+2026-07-01 14:54:08 [INFO] Accès espace administrateur
+2026-07-01 14:54:53 [INFO] Consultation moyenne générale étudiant ID Yao
+2026-07-01 14:55:02 [WARNING] Option invalide dans sousMenuStatistiques : "0"
+2026-07-01 14:55:07 [WARNING] Option invalide dans sousMenuStatistiques : "0"
+2026-07-01 14:55:19 [INFO] Déconnexion de l'administrateur

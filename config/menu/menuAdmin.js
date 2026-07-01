@@ -6,7 +6,7 @@ import { ajouterSubjects, modifierSubjects, supprimerSubjects, listerSubjects } 
 import { ajouterGrades, modifierGrades, supprimerGrades, listerGrades } from "../../services/servicesGrades.js";
 import { afficherAbsences } from "../../services/servicesAbsences.js";
 import { ajouterUsers, modifierUsers, supprimerUsers, listerUsers } from "../../services/servicesUsers.js";
-import { moyenneEtudiant, moyenneParMatiere, compterAbsencesEtudiant, classementEtudiants, statsGlobales } from "../../services/servicesStatistiques.js";
+import { moyenneEtudiant, moyenneParMatiere, compterAbsencesEtudiant, classementEtudiants, statsGlobales } from "../../services/servicesStatistique.js";
 import logger from "../../utils/logger.js";
 
 async function menuAdmin() {
