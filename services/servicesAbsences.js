@@ -8,7 +8,7 @@ function enregistrerAbsences(student_id, date, status) {
     return db.prepare(`
         INSERT OR IGNORE INTO absences(student_id, date, status)
         VALUES (?, ?, ?)
-    `).run(addAbsences.student_id, addAbsences.date, addAbsences.status); // ✅ absences et non grades
+    `).run(addAbsences.student_id, addAbsences.date, addAbsences.status); // absences et non grades
 }
 
 // 2. Afficher les absences avec nom et prénom de l'étudiant

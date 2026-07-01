@@ -4,7 +4,7 @@ import { ajouterStudents, modifierStudents, supprimerStudents, listerStudents } 
 import { ajouterTeachers, modifierTeachers, supprimerTeachers, listerTeachers } from "../../services/servicesTeachers.js";
 import { ajouterSubjects, modifierSubjects, supprimerSubjects, listerSubjects } from "../../services/servicesSubjects.js";
 import { ajouterGrades, modifierGrades, supprimerGrades, listerGrades } from "../../services/servicesGrades.js";
-import { afficherAbsences } from "../../services/servicesAbsences.js";
+import { absencesParEtudiant, afficherAbsences } from "../../services/servicesAbsences.js";
 import { ajouterUsers, modifierUsers, supprimerUsers, listerUsers } from "../../services/servicesUsers.js";
 import { moyenneEtudiant, moyenneParMatiere, compterAbsencesEtudiant, classementEtudiants, statsGlobales } from "../../services/servicesStatistique.js";
 import logger from "../../utils/logger.js";
@@ -424,6 +424,7 @@ async function sousMenuAbsences() {
     switch (choix) {
         case '1': {
             logger.info("Consultation des absences par l'administrateur");
+            const liste = afficherAbsences()
             if (liste.length === 0) console.log("Aucune absence.");
             else console.table(liste);
             await poserQuestion("\nAppuyez sur Entrée...");

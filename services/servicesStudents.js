@@ -14,7 +14,7 @@ function modifierStudents(id, data) {
     return db.prepare(`
         UPDATE students SET matricule = ?, nom = ?, prenom = ?, age = ?, classe = ?
         WHERE id = ?
-    `).run(data.matricule, data.nom, data.prenom, data.age, data.classe, id); // ✅ WHERE id = ? ajouté
+    `).run(data.matricule, data.nom, data.prenom, data.age, data.classe, id); // WHERE id = ? ajouté
 }
 
 function supprimerStudents(id) {
