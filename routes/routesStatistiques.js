@@ -2,13 +2,18 @@ import express from "express";
 
 const router = express.Router();
 
+//statistiques
+router.get("/", (req, res) => {
+    res.send("Statistiques : /best-student, /average, /absences");
+});
+
 // Identifier le meilleur étudiant
-router.get("/best-student", (req, res) => {
+router.get("/meilleur- etudiant", (req, res) => {
     res.send("Meilleur étudiant selon la moyenne");
 });
 
 // Calculer la moyenne générale
-router.get("/average", (req, res) => {
+router.get("/moyenne", (req, res) => {
     res.send("Moyenne générale des étudiants");
 });
 
