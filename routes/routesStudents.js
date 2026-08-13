@@ -1,5 +1,6 @@
 import express from "express";
-import { getStudents, getStudent } from "../controller/controllerStudents.js";
+import { getStudents, getStudent, createStudent } from "../controller/controllerStudents.js";
+import { ajouterStudents } from "../services/servicesStudents.js";
 
 const router = express.Router();
 
@@ -10,10 +11,8 @@ router.get("/", getStudents);
 // //lire un etudiant
 router.get("/:id",getStudent);
 
-// //ajouter un etudiant
-// router.post("/", (req,res) => {
-//     res.send("Étudiant ajouté");
-// });
+//ajouter un etudiant
+router.post("/", createStudent);
 
 // //modifier un etudiant
 // router.put("/:id", (req, res) => {
