@@ -1,31 +1,22 @@
 import express from "express";
+import { getTeacher, getTeachers, createTeacher,  updateTeacher, deleteTeacher } from "../controller/controllerTeachers.js";
 
 const router = express.Router();
 
 //lister les professeurs
-router.get("/", (req, res) => {
-    res.send("Liste des professeurs");
-});
+router.get("/", getTeachers);
 
 //lire un professeur
-router.get("/:id",(req, res) => {
-    res.send(`Professeur ${req.params.id}`);
-});
+router.get("/:id",getTeacher);
 
 //ajouter un professeur
-router.post("/", (req, res) => {
-    res.send("Professeur ajouté");
-});
+router.post("/", createTeacher);
 
 //modifier un professeur
-router.put("/:id", (req, res) => {
-    res.send(`Professeur ${req.params.id} modifié`);
-});
+router.put("/:id", updateTeacher);
 
 //supprimer un professeur
-router.delete("/:id", (req, res) => {
-    res.send(`Professeur ${req.params.id} supprimé`);
-});
+router.delete("/:id", deleteTeacher);
 
 
 export default router

@@ -1,6 +1,6 @@
 import express from "express";
 import routesStudents from "./routes/routesStudents.js"
-// import routesTeachers from "./routes/routesTeachers.js";
+import routesTeachers from "./routes/routesTeachers.js";
 // import routesSubjects from "./routes/routesSubjects.js";
 // import routesGrades from "./routes/routesGrades.js";
 // import routesAbsences from "./routes/routesAbsences.js";
@@ -12,7 +12,7 @@ const app = express();
 app.use(express.json());
 
 app.use("/students", routesStudents);
-// app.use("/teachers", routesTeachers);
+app.use("/teachers", routesTeachers);
 // app.use("/subjects", routesSubjects);
 // app.use("/grades", routesGrades);
 // app.use("/absences", routesAbsences);
