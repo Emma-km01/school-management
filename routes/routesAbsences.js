@@ -1,31 +1,32 @@
 import express from "express";
 
+import {
+    getAbsences,
+    getRawAbsences,
+    getStudentAbsences,
+    createAbsence,
+    updateAbsence,
+    deleteAbsence
+} from "../controller/controllerAbsences.js";
+
 const router = express.Router();
 
-//lister les absences 
-router.get("/", (req, res) => {
-    res.send("Liste des absents");
-});
+// Toutes les absences avec nom et prénom
+router.get("/", getAbsences);
 
-//recuperer une absence
-router.get("/:id",(req, res) => {
-    res.send(`Absence ${req.params.id}`);
-});
+// Toutes les absences brutes
+router.get("/raw", getRawAbsences);
 
-//ajouter une absence
-router.post("/", (req, res) => {
-    res.send("Absence ajoutée");
-});
+// Absences d'un étudiant
+router.get("/student/:student_id", getStudentAbsences);
 
-//modifier une absence
-router.put("/:id", (req, res) => {
-    res.send(`Absence ${req.params.id} modifiée`);
-});
+// Enregistrer une absence
+router.post("/", createAbsence);
 
-//supprimer une absence
-router.delete("/:id", (req, res) => {
-    res.send(`Absence ${req.params.id} supprimée`);
-});
+// Modifier une absence
+router.put("/:id", updateAbsence);
 
+// Supprimer une absence
+router.delete("/:id", deleteAbsence);
 
-export default router
+export default router;

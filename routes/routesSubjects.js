@@ -1,31 +1,32 @@
 import express from "express";
 
+import {
+    getSubjects,
+    getSubject,
+    createSubject,
+    assignSubject,
+    updateSubject,
+    deleteSubject
+} from "../controller/controllerSubjects.js";
+
 const router = express.Router();
 
-//lister les matieres
-router.get("/", (req, res) => {
-    res.send("Liste des matières");
-});
+// Lister les matières
+router.get("/", getSubjects);
 
-//recuperer une matiere
-router.get("/:id",(req, res) => {
-    res.send(`Matière ${req.params.id}`);
-});
+// Récupérer une matière
+router.get("/:id", getSubject);
 
-//ajouter une matiere
-router.post("/", (req, res) => {
-    res.send("Matière ajoutée");
-});
+// Ajouter une matière
+router.post("/", createSubject);
 
-//modifier une matiere
-router.put("/:id", (req, res) => {
-    res.send(`Matière ${req.params.id} modifiée`);
-});
+// Affecter un professeur à une matière
+router.patch("/:id/teacher", assignSubject);
 
-//supprimer une matiere
-router.delete("/:id", (req, res) => {
-    res.send(`Matière ${req.params.id} supprimée`);
-});
+// Modifier une matière
+router.put("/:id", updateSubject);
 
+// Supprimer une matière
+router.delete("/:id", deleteSubject);
 
-export default router
+export default router;

@@ -30,8 +30,14 @@ function supprimerSubjects(id) {
 
 function listerSubjects() {
     return db.prepare(`
-        SELECT * FROM subjects
+        SELECT * FROM subjects 
     `).all();
 }
 
-export { ajouterSubjects, affecterSubjects, modifierSubjects, supprimerSubjects, listerSubjects };
+function rechercherSubjects(id) {
+    return db.prepare(`
+        SELECT * FROM subjects WHERE id = ?
+    `).get(id);
+}
+
+export { ajouterSubjects, affecterSubjects, modifierSubjects, supprimerSubjects, listerSubjects, rechercherSubjects };

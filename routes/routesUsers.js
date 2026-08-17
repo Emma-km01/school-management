@@ -1,31 +1,28 @@
 import express from "express";
 
+import {
+    getUsers,
+    getUser,
+    createUser,
+    updateUser,
+    deleteUser
+} from "../controller/controllerUsers.js";
+
 const router = express.Router();
 
-//lister tous les utilisateurs
-router.get("/", (req, res) => {
-    res.send("Liste des utilisateurs");
-});
+// Lister tous les utilisateurs
+router.get("/", getUsers);
 
-//recuperer un utilisateur
-router.get("/:id",(req, res) => {
-    res.send(`Utilisateur ${req.params.id}`);
-});
+// Récupérer un utilisateur
+router.get("/:id", getUser);
 
-//ajouter un utilisateur
-router.post("/", (req, res) => {
-    res.send("Utilisateur ajouté");
-});
+// Ajouter un utilisateur
+router.post("/", createUser);
 
-//modifier un utilisateur
-router.put("/:id", (req, res) => {
-    res.send(`Utilisateur ${req.params.id} modifié`);
-});
+// Modifier un utilisateur
+router.put("/:id", updateUser);
 
-//supprimer un utilisateur
-router.delete("/:id", (req, res) => {
-    res.send(`Utilisateur ${req.params.id} supprimé`);
-});
+// Supprimer un utilisateur
+router.delete("/:id", deleteUser);
 
-
-export default router
+export default router;

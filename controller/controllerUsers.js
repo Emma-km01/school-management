@@ -1,49 +1,67 @@
 import {
-    listerUsers,
-    rechercherUsers,
     ajouterUsers,
     modifierUsers,
-    supprimerUsers
+    supprimerUsers,
+    rechercherUsers,
+    listerUsers
 } from "../services/servicesUsers.js";
 
+// Lister tous les utilisateurs
 export function getUsers(req, res) {
-    const Users = listerUsers();
-    res.json(Users);
+    const users = listerUsers();
+    res.json(users);
 }
 
-export function getUsers(req, res) {
+// Récupérer un utilisateur
+export function getUser(req, res) {
     const id = req.params.id;
-    const Users = rechercherUsers(id);
-    res.json(Users);
+    const user = rechercherUsers(id);
+
+    if (!user) {
+        return res.status(404).json({
+            message: "Utilisateur introuvable"
+        });
+    }
+
+    res.json(user);
 }
 
-export function createUsers(req, res) {
+// Ajouter un utilisateur
+export function createUser(req, res) {
     const { name, role, username, motdepasse } = req.body;
 
-    const Users = ajouterUsers(name, role, username, motdepasse);
+    const result = ajouterUsers(
+        name,
+        role,
+        username,
+        motdepasse
+    );
 
-    res.json(Users);
+    res.status(201).json({
+        message: "Utilisateur ajouté",
+        id: result.lastInsertRowid
+    });
 }
 
-export function updateUsers(req, res) {
+// Modifier un utilisateur
+export function updateUser(req, res) {
     const id = req.params.id;
+    const data = req.body;
 
-    const { nom, matiere } = req.body;
+    modifierUsers(id, data);
 
-    const data = {
-        nom,
-        matiere
-    };
-
-    const Users = modifierUsers(id, data);
-
-    res.json(Users);
+    res.json({
+        message: "Utilisateur modifié"
+    });
 }
 
-export function deleteUsers(req, res) {
+// Supprimer un utilisateur
+export function deleteUser(req, res) {
     const id = req.params.id;
 
-    const Users = supprimerUsers(id);
+    supprimerUsers(id);
 
-    res.json(Users);
+    res.json({
+        message: "Utilisateur supprimé"
+    });
 }

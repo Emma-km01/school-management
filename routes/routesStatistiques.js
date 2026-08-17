@@ -1,25 +1,36 @@
 import express from "express";
 
+import {
+    getStatistiques,
+    getMeilleurEtudiant,
+    getClassementEtudiants,
+    getMoyenneGenerale,
+    getMoyenneEtudiant,
+    getMoyennesParMatiere,
+    getAbsencesEtudiant
+} from "../controller/controllerStatistiques.js";
+
 const router = express.Router();
 
-//statistiques
-router.get("/", (req, res) => {
-    res.send("Statistiques : /best-student, /average, /absences");
-});
+// Statistiques globales
+router.get("/", getStatistiques);
 
-// Identifier le meilleur étudiant
-router.get("/meilleur- etudiant", (req, res) => {
-    res.send("Meilleur étudiant selon la moyenne");
-});
+// Meilleur étudiant
+router.get("/meilleur-etudiant", getMeilleurEtudiant);
 
-// Calculer la moyenne générale
-router.get("/moyenne", (req, res) => {
-    res.send("Moyenne générale des étudiants");
-});
+// Classement des étudiants
+router.get("/classement", getClassementEtudiants);
 
-// Compter les absences
-router.get("/absences", (req, res) => {
-    res.send("Nombre total d'absences");
-});
+// Moyenne générale
+router.get("/moyenne-generale", getMoyenneGenerale);
+
+// Moyenne d'un étudiant
+router.get("/moyenne/:student_id", getMoyenneEtudiant);
+
+// Moyennes par matière
+router.get("/moyennes-matieres/:student_id", getMoyennesParMatiere);
+
+// Absences d'un étudiant
+router.get("/absences/:student_id", getAbsencesEtudiant);
 
 export default router;

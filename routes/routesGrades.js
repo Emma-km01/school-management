@@ -1,31 +1,28 @@
 import express from "express";
 
+import {
+    getGrades,
+    createGrade,
+    updateGrade,
+    deleteGrade,
+    getGradeAverage
+} from "../controller/controllerGrades.js";
+
 const router = express.Router();
 
-//lister les notes 
-router.get("/", (req, res) => {
-    res.send("Liste des notes");
-});
+// Lister toutes les notes
+router.get("/", getGrades);
 
-//lire une note
-router.get("/:id",(req, res) => {
-    res.send(`Note ${req.params.id}`);
-});
+// Calculer la moyenne d'un étudiant dans une matière
+router.get("/average/:student_id/:subject_id", getGradeAverage);
 
-//ajouter une note
-router.post("/", (req, res) => {
-    res.send("Note ajoutée");
-});
+// Ajouter une note
+router.post("/", createGrade);
 
-//modifier une note
-router.put("/:id", (req, res) => {
-    res.send(`Note ${req.params.id} modifiée`);
-});
+// Modifier une note
+router.put("/:id", updateGrade);
 
-//supprimer une note
-router.delete("/:id", (req, res) => {
-    res.send(`Note ${req.params.id} supprimée`);
-});
+// Supprimer une note
+router.delete("/:id", deleteGrade);
 
-
-export default router
+export default router;
