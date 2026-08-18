@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Notes - School Management</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/grades.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+</head>
+
+<body>
+
+    <div class="conteneur-principal">
+
+        <!-- =========================
+             BARRE LATERALE
+        ========================== -->
+
+        <aside class="barre-laterale">
+
+            <div class="logo-application">
+
+                <img
+                    src="image/logo.png"
+                    alt="Logo School Management"
+                >
+
+                <h2>School Management</h2>
+
+            </div>
+
+
+            <nav class="menu-navigation">
+
+                <a href="tableau-bord.html" class="lien-navigation">
+
+                    <i class="fa-solid fa-house"></i>
+
+                    <span>Tableau de bord</span>
+
+                </a>
+
+
+                <a href="students.html" class="lien-navigation">
+
+                    <i class="fa-solid fa-user-graduate"></i>
+
+                    <span>Étudiants</span>
+
+                </a>
+
+
+                <a href="teachers.html" class="lien-navigation">
+
+                    <i class="fa-solid fa-chalkboard-user"></i>
+
+                    <span>Professeurs</span>
+
+                </a>
+
+
+                <a href="subjects.html" class="lien-navigation">
+
+                    <i class="fa-solid fa-book"></i>
+
+                    <span>Matières</span>
+
+                </a>
+
+
+                <a href="grades.html" class="lien-navigation actif">
+
+                    <i class="fa-solid fa-pen-to-square"></i>
+
+                    <span>Notes</span>
+
+                </a>
+
+
+                <a href="absences.html" class="lien-navigation">
+
+                    <i class="fa-solid fa-calendar-xmark"></i>
+
+                    <span>Absences</span>
+
+                </a>
+
+
+                <a href="statistiques.html" class="lien-navigation">
+
+                    <i class="fa-solid fa-chart-column"></i>
+
+                    <span>Statistiques</span>
+
+                </a>
+
+            </nav>
+
+
+            <div class="menu-inferieur">
+
+                <a href="#" class="lien-navigation">
+
+                    <i class="fa-solid fa-gear"></i>
+
+                    <span>Paramètres</span>
+
+                </a>
+
+
+                <a
+                    href="index.html"
+                    class="lien-navigation lien-deconnexion"
+                >
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                    <span>Déconnexion</span>
+
+                </a>
+
+            </div>
+
+        </aside>
+
+
+        <!-- =========================
+             CONTENU PRINCIPAL
+        ========================== -->
+
+        <main class="contenu-principal">
+
+
+            <!-- =========================
+                 BARRE SUPERIEURE
+            ========================== -->
+
+            <header class="barre-superieure">
+
+                <div class="titre-page">
+
+                    <h1>Notes</h1>
+
+                    <p>
+                        Gérez les notes et les résultats des étudiants.
+                    </p>
+
+                </div>
+
+
+                <div class="profil-utilisateur">
+
+                    <div class="icone-notification">
+
+                        <i class="fa-regular fa-bell"></i>
+
+                        <span class="badge-notification">
+                            3
+                        </span>
+
+                    </div>
+
+
+                    <div class="informations-utilisateur">
+
+                        <div class="avatar-utilisateur">
+
+                            <i class="fa-solid fa-user"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <strong id="nom-utilisateur">
+                                Administrateur
+                            </strong>
+
+                            <span id="role-utilisateur">
+                                Administrateur
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- =========================
+                 OUTILS
+            ========================== -->
+
+            <section class="outils-grades">
+
+
+                <!-- RECHERCHE -->
+
+                <div class="barre-recherche">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input
+                        type="text"
+                        id="recherche-grade"
+                        placeholder="Rechercher un étudiant..."
+                    >
+
+                </div>
+
+
+                <!-- CLASSE -->
+
+                <select
+                    id="filtre-classe"
+                    class="filtre-selection"
+                >
+
+                    <option value="">
+                        Toutes les classes
+                    </option>
+
+                    <option value="6e">
+                        6e
+                    </option>
+
+                    <option value="5e">
+                        5e
+                    </option>
+
+                    <option value="4e">
+                        4e
+                    </option>
+
+                    <option value="3e">
+                        3e
+                    </option>
+
+                    <option value="2nde">
+                        2nde
+                    </option>
+
+                    <option value="1ere">
+                        1ère
+                    </option>
+
+                    <option value="terminale">
+                        Terminale
+                    </option>
+
+                </select>
+
+
+                <!-- MATIERE -->
+
+                <select
+                    id="filtre-matiere"
+                    class="filtre-selection"
+                >
+
+                    <option value="">
+                        Toutes les matières
+                    </option>
+
+                    <option value="Mathématiques">
+                        Mathématiques
+                    </option>
+
+                    <option value="Français">
+                        Français
+                    </option>
+
+                    <option value="Anglais">
+                        Anglais
+                    </option>
+
+                    <option value="Physique-Chimie">
+                        Physique-Chimie
+                    </option>
+
+                    <option value="Histoire-Géographie">
+                        Histoire-Géographie
+                    </option>
+
+                </select>
+
+
+                <!-- AJOUTER -->
+
+                <button
+                    type="button"
+                    class="bouton-ajouter"
+                    id="bouton-ajouter-grade"
+                >
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    Ajouter une note
+
+                </button>
+
+            </section>
+
+
+            <!-- =========================
+                 STATISTIQUES
+            ========================== -->
+
+            <section class="statistique-grades">
+
+
+                <div class="petite-carte">
+
+                    <div class="petite-icone">
+
+                        <i class="fa-solid fa-pen-to-square"></i>
+
+                    </div>
+
+
+                    <div class="informations-petite-carte">
+
+                        <span>
+                            Total notes
+                        </span>
+
+                        <strong id="nombre-grades">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="petite-carte">
+
+                    <div class="petite-icone">
+
+                        <i class="fa-solid fa-chart-line"></i>
+
+                    </div>
+
+
+                    <div class="informations-petite-carte">
+
+                        <span>
+                            Moyenne générale
+                        </span>
+
+                        <strong id="moyenne-generale">
+                            0,00
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="petite-carte">
+
+                    <div class="petite-icone">
+
+                        <i class="fa-solid fa-trophy"></i>
+
+                    </div>
+
+
+                    <div class="informations-petite-carte">
+
+                        <span>
+                            Meilleure note
+                        </span>
+
+                        <strong id="meilleure-note">
+                            0,00
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 TABLEAU DES NOTES
+            ========================== -->
+
+            <section class="carte-tableau">
+
+                <div class="entete-tableau">
+
+                    <div>
+
+                        <h2>
+                            Liste des notes
+                        </h2>
+
+                        <p>
+                            Consultez et gérez les notes des étudiants.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="conteneur-tableau">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Étudiant
+                                </th>
+
+                                <th>
+                                    Classe
+                                </th>
+
+                                <th>
+                                    Matière
+                                </th>
+
+                                <th>
+                                    Note
+                                </th>
+
+                                <th>
+                                    Coefficient
+                                </th>
+
+                                <th>
+                                    Date
+                                </th>
+
+                                <th>
+                                    Actions
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="liste-grades">
+
+                            <tr class="aucun-grade">
+
+                                <td colspan="7">
+
+                                    <div class="message-vide">
+
+                                        <i class="fa-solid fa-pen-to-square"></i>
+
+                                        <h3>
+                                            Aucune note
+                                        </h3>
+
+                                        <p>
+                                            Aucune note n'est actuellement enregistrée.
+                                        </p>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 PAGINATION
+            ========================== -->
+
+            <div class="pagination">
+
+                <button
+                    type="button"
+                    class="bouton-pagination"
+                    disabled
+                >
+
+                    <i class="fa-solid fa-chevron-left"></i>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="numero-page actif"
+                >
+                    1
+                </button>
+
+
+                <button
+                    type="button"
+                    class="bouton-pagination"
+                    disabled
+                >
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                </button>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <script src="js/grades.js"></script>
+
+</body>
+
+</html>

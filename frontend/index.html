@@ -1,0 +1,410 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>School Management - Connexion</title>
+
+
+    <!-- ==============================
+         FONT AWESOME
+    =============================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+
+    <!-- ==============================
+         CSS
+    =============================== -->
+
+    <link
+        rel="stylesheet"
+        href="./css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <main class="page-connexion">
+
+
+        <!-- ==========================================
+             PARTIE PRÉSENTATION
+        =========================================== -->
+
+        <section class="partie-presentation">
+
+
+            <!-- ------------------------------
+                 DÉCORATIONS
+            ------------------------------- -->
+
+            <div class="decoration decoration-crayon">
+                <i class="fa-solid fa-pencil"></i>
+            </div>
+
+
+            <div class="decoration decoration-livre">
+                <i class="fa-solid fa-book"></i>
+            </div>
+
+
+            <div class="decoration decoration-diplome">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+
+
+            <div class="decoration decoration-etoile">
+                <i class="fa-solid fa-star"></i>
+            </div>
+
+
+            <div class="decoration decoration-regle">
+                <i class="fa-solid fa-ruler"></i>
+            </div>
+
+
+            <div class="decoration decoration-cahier">
+                <i class="fa-solid fa-book-open"></i>
+            </div>
+
+
+            <div class="decoration decoration-calculatrice">
+                <i class="fa-solid fa-calculator"></i>
+            </div>
+
+
+            <div class="decoration decoration-puzzle">
+                <i class="fa-solid fa-puzzle-piece"></i>
+            </div>
+
+
+            <!-- ------------------------------
+                 CONTENU DE PRÉSENTATION
+            ------------------------------- -->
+
+            <div class="contenu-presentation">
+
+
+                <!-- Logo -->
+
+                <div class="conteneur-logo">
+
+                    <img
+                        src="./image/logo.png"
+                        alt="Logo School Management"
+                    >
+
+                </div>
+
+
+                <!-- Texte -->
+
+                <div class="description-presentation">
+
+                    <h1>
+                        Gérez votre établissement
+                        simplement
+                    </h1>
+
+
+                    <p>
+                        Une plateforme complète pour gérer
+                        les étudiants, les professeurs,
+                        les matières, les notes et les absences
+                        depuis un seul espace.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- ------------------------------
+                 COPYRIGHT
+            ------------------------------- -->
+
+            <div class="droits-auteur">
+
+                <p>
+                    © 2026 School Management
+                </p>
+
+                <span>
+                    Tous droits réservés.
+                </span>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ==========================================
+             SECTION CONNEXION
+        =========================================== -->
+
+        <section class="section-connexion">
+
+
+            <div class="carte-connexion">
+
+
+                <!-- ------------------------------
+                     EN-TÊTE
+                ------------------------------- -->
+
+                <div class="entete-connexion">
+
+                    <h2>
+                        Connexion
+                    </h2>
+
+
+                    <p>
+                        Connectez-vous à votre espace
+                    </p>
+
+                </div>
+
+
+
+                <!-- ------------------------------
+                     FORMULAIRE
+                ------------------------------- -->
+
+                <form
+                    id="formulaireConnexion"
+                    class="formulaire-connexion"
+                >
+
+
+                    <!-- ==========================
+                         IDENTIFIANT
+                    =========================== -->
+
+                    <div class="groupe-champ">
+
+                        <label for="identifiant">
+                            Identifiant
+                        </label>
+
+
+                        <div class="conteneur-champ">
+
+                            <span class="icone-champ">
+
+                                <i class="fa-regular fa-user"></i>
+
+                            </span>
+
+
+                            <input
+                                type="text"
+                                id="identifiant"
+                                name="identifiant"
+                                placeholder="Entrez votre identifiant"
+                                autocomplete="username"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ==========================
+                         MOT DE PASSE
+                    =========================== -->
+
+                    <div class="groupe-champ">
+
+                        <label for="motDePasse">
+                            Mot de passe
+                        </label>
+
+
+                        <div class="conteneur-champ">
+
+                            <span class="icone-champ">
+
+                                <i class="fa-solid fa-lock"></i>
+
+                            </span>
+
+
+                            <input
+                                type="password"
+                                id="motDePasse"
+                                name="motDePasse"
+                                placeholder="Entrez votre mot de passe"
+                                autocomplete="current-password"
+                                required
+                            >
+
+
+                            <button
+                                type="button"
+                                id="boutonAfficherMotDePasse"
+                                class="bouton-mot-de-passe"
+                                aria-label="Afficher le mot de passe"
+                            >
+
+                                <i class="fa-regular fa-eye"></i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ==========================
+                         RÔLE
+                    =========================== -->
+
+                    <div class="groupe-champ">
+
+                        <label for="role">
+                            Rôle
+                        </label>
+
+
+                        <div class="conteneur-champ">
+
+                            <span class="icone-champ">
+
+                                <i class="fa-solid fa-user-tag"></i>
+
+                            </span>
+
+
+                            <select
+                                id="role"
+                                name="role"
+                                required
+                            >
+
+                                <option value="">
+                                    Sélectionnez votre rôle
+                                </option>
+
+
+                                <option value="admin">
+                                    Administrateur
+                                </option>
+
+
+                                <option value="teacher">
+                                    Professeur
+                                </option>
+
+
+                                <option value="student">
+                                    Étudiant
+                                </option>
+
+                            </select>
+
+
+                            <span class="icone-select">
+
+                                <i class="fa-solid fa-chevron-down"></i>
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ==========================
+                         MESSAGE
+                    =========================== -->
+
+                    <div
+                        id="messageConnexion"
+                        class="message-connexion"
+                        role="alert"
+                    ></div>
+
+
+
+                    <!-- ==========================
+                         BOUTON CONNEXION
+                    =========================== -->
+
+                    <button
+                        type="submit"
+                        id="boutonConnexion"
+                        class="bouton-connexion"
+                    >
+
+                        <span>
+                            Se connecter
+                        </span>
+
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+
+                </form>
+
+
+
+                <!-- ------------------------------
+                     INFORMATIONS
+                ------------------------------- -->
+
+                <div class="pied-connexion">
+
+                    <i class="fa-solid fa-circle-info"></i>
+
+
+                    <p>
+                        En cas de problème de connexion,
+                        contactez l'administrateur.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- ==============================
+         JAVASCRIPT
+    =============================== -->
+
+    <script src="./js/connexion.js"></script>
+
+</body>
+
+</html>

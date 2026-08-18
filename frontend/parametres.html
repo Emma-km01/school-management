@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Paramètres - School Management</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/parametres.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+</head>
+
+
+<body>
+
+    <div class="conteneur-principal">
+
+
+        <!-- =========================
+             BARRE LATERALE
+        ========================== -->
+
+        <aside class="barre-laterale">
+
+
+            <div class="logo-application">
+
+                <img
+                    src="image/logo.png"
+                    alt="Logo School Management"
+                >
+
+                <h2>
+                    School Management
+                </h2>
+
+            </div>
+
+
+            <nav class="menu-navigation">
+
+
+                <a
+                    href="tableau-bord.html"
+                    class="lien-navigation"
+                >
+
+                    <i class="fa-solid fa-house"></i>
+
+                    <span>
+                        Tableau de bord
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="students.html"
+                    class="lien-navigation"
+                >
+
+                    <i class="fa-solid fa-user-graduate"></i>
+
+                    <span>
+                        Étudiants
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="teachers.html"
+                    class="lien-navigation"
+                >
+
+                    <i class="fa-solid fa-chalkboard-user"></i>
+
+                    <span>
+                        Professeurs
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="subjects.html"
+                    class="lien-navigation"
+                >
+
+                    <i class="fa-solid fa-book"></i>
+
+                    <span>
+                        Matières
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="grades.html"
+                    class="lien-navigation"
+                >
+
+                    <i class="fa-solid fa-pen-to-square"></i>
+
+                    <span>
+                        Notes
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="absences.html"
+                    class="lien-navigation"
+                >
+
+                    <i class="fa-solid fa-calendar-xmark"></i>
+
+                    <span>
+                        Absences
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="statistiques.html"
+                    class="lien-navigation"
+                >
+
+                    <i class="fa-solid fa-chart-column"></i>
+
+                    <span>
+                        Statistiques
+                    </span>
+
+                </a>
+
+            </nav>
+
+
+            <div class="menu-inferieur">
+
+
+                <a
+                    href="parametres.html"
+                    class="lien-navigation actif"
+                >
+
+                    <i class="fa-solid fa-gear"></i>
+
+                    <span>
+                        Paramètres
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="index.html"
+                    class="lien-navigation lien-deconnexion"
+                >
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                    <span>
+                        Déconnexion
+                    </span>
+
+                </a>
+
+            </div>
+
+        </aside>
+
+
+
+        <!-- =========================
+             CONTENU PRINCIPAL
+        ========================== -->
+
+        <main class="contenu-principal">
+
+
+            <!-- =========================
+                 BARRE SUPERIEURE
+            ========================== -->
+
+            <header class="barre-superieure">
+
+
+                <div class="titre-page">
+
+                    <h1>
+                        Paramètres
+                    </h1>
+
+                    <p>
+                        Gérez votre compte et les paramètres de l'application.
+                    </p>
+
+                </div>
+
+
+                <div class="profil-utilisateur">
+
+
+                    <div class="icone-notification">
+
+                        <i class="fa-regular fa-bell"></i>
+
+                        <span class="badge-notification">
+                            3
+                        </span>
+
+                    </div>
+
+
+                    <div class="informations-utilisateur">
+
+                        <div class="avatar-utilisateur">
+
+                            <i class="fa-solid fa-user"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <strong id="nom-utilisateur">
+                                Administrateur
+                            </strong>
+
+                            <span id="role-utilisateur">
+                                Administrateur
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+
+            <!-- =========================
+                 CONTENU PARAMETRES
+            ========================== -->
+
+            <div class="conteneur-parametres">
+
+
+                <!-- =========================
+                     MENU PARAMETRES
+                ========================== -->
+
+                <aside class="menu-parametres">
+
+
+                    <button
+                        class="onglet-parametre actif"
+                        data-section="profil"
+                    >
+
+                        <i class="fa-regular fa-user"></i>
+
+                        <span>
+                            Mon profil
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        class="onglet-parametre"
+                        data-section="securite"
+                    >
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        <span>
+                            Sécurité
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        class="onglet-parametre"
+                        data-section="notifications"
+                    >
+
+                        <i class="fa-regular fa-bell"></i>
+
+                        <span>
+                            Notifications
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        class="onglet-parametre"
+                        data-section="application"
+                    >
+
+                        <i class="fa-solid fa-sliders"></i>
+
+                        <span>
+                            Application
+                        </span>
+
+                    </button>
+
+                </aside>
+
+
+
+                <!-- =========================
+                     SECTIONS
+                ========================== -->
+
+                <div class="contenu-parametres">
+
+
+                    <!-- =========================
+                         PROFIL
+                    ========================== -->
+
+                    <section
+                        id="profil"
+                        class="section-parametre active"
+                    >
+
+
+                        <div class="entete-section">
+
+                            <h2>
+                                Mon profil
+                            </h2>
+
+                            <p>
+                                Modifiez vos informations personnelles.
+                            </p>
+
+                        </div>
+
+
+                        <form id="formulaire-profil">
+
+
+                            <div class="zone-avatar">
+
+                                <div class="grand-avatar">
+
+                                    <i class="fa-solid fa-user"></i>
+
+                                </div>
+
+
+                                <div>
+
+                                    <strong>
+                                        Photo de profil
+                                    </strong>
+
+                                    <p>
+                                        Votre photo apparaîtra sur votre compte.
+                                    </p>
+
+                                    <button
+                                        type="button"
+                                        class="bouton-secondaire"
+                                    >
+
+                                        <i class="fa-solid fa-camera"></i>
+
+                                        Modifier
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="grille-champs">
+
+
+                                <div class="groupe-champ">
+
+                                    <label for="parametre-nom">
+                                        Nom
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        id="parametre-nom"
+                                        placeholder="Votre nom"
+                                    >
+
+                                </div>
+
+
+                                <div class="groupe-champ">
+
+                                    <label for="parametre-prenom">
+                                        Prénom
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        id="parametre-prenom"
+                                        placeholder="Votre prénom"
+                                    >
+
+                                </div>
+
+
+                                <div class="groupe-champ">
+
+                                    <label for="parametre-email">
+                                        Adresse e-mail
+                                    </label>
+
+                                    <input
+                                        type="email"
+                                        id="parametre-email"
+                                        placeholder="Votre adresse e-mail"
+                                    >
+
+                                </div>
+
+
+                                <div class="groupe-champ">
+
+                                    <label for="parametre-telephone">
+                                        Téléphone
+                                    </label>
+
+                                    <input
+                                        type="tel"
+                                        id="parametre-telephone"
+                                        placeholder="Votre numéro"
+                                    >
+
+                                </div>
+
+
+                                <div class="groupe-champ">
+
+                                    <label for="parametre-role">
+                                        Rôle
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        id="parametre-role"
+                                        value="Administrateur"
+                                        disabled
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="actions-formulaire">
+
+                                <button
+                                    type="submit"
+                                    class="bouton-principal"
+                                >
+
+                                    <i class="fa-solid fa-check"></i>
+
+                                    Enregistrer les modifications
+
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                    </section>
+
+
+
+                    <!-- =========================
+                         SECURITE
+                    ========================== -->
+
+                    <section
+                        id="securite"
+                        class="section-parametre"
+                    >
+
+
+                        <div class="entete-section">
+
+                            <h2>
+                                Sécurité
+                            </h2>
+
+                            <p>
+                                Gérez votre mot de passe et la sécurité de votre compte.
+                            </p>
+
+                        </div>
+
+
+                        <form id="formulaire-securite">
+
+
+                            <div class="groupe-champ">
+
+                                <label for="ancien-mot-de-passe">
+                                    Ancien mot de passe
+                                </label>
+
+                                <input
+                                    type="password"
+                                    id="ancien-mot-de-passe"
+                                    placeholder="Votre ancien mot de passe"
+                                >
+
+                            </div>
+
+
+                            <div class="groupe-champ">
+
+                                <label for="nouveau-mot-de-passe">
+                                    Nouveau mot de passe
+                                </label>
+
+                                <input
+                                    type="password"
+                                    id="nouveau-mot-de-passe"
+                                    placeholder="Votre nouveau mot de passe"
+                                >
+
+                            </div>
+
+
+                            <div class="groupe-champ">
+
+                                <label for="confirmation-nouveau-mot-de-passe">
+                                    Confirmer le nouveau mot de passe
+                                </label>
+
+                                <input
+                                    type="password"
+                                    id="confirmation-nouveau-mot-de-passe"
+                                    placeholder="Confirmez votre nouveau mot de passe"
+                                >
+
+                            </div>
+
+
+                            <div class="actions-formulaire">
+
+                                <button
+                                    type="submit"
+                                    class="bouton-principal"
+                                >
+
+                                    <i class="fa-solid fa-key"></i>
+
+                                    Modifier le mot de passe
+
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                    </section>
+
+
+
+                    <!-- =========================
+                         NOTIFICATIONS
+                    ========================== -->
+
+                    <section
+                        id="notifications"
+                        class="section-parametre"
+                    >
+
+
+                        <div class="entete-section">
+
+                            <h2>
+                                Notifications
+                            </h2>
+
+                            <p>
+                                Choisissez les notifications que vous souhaitez recevoir.
+                            </p>
+
+                        </div>
+
+
+                        <div class="liste-options">
+
+
+                            <div class="option-parametre">
+
+                                <div>
+
+                                    <strong>
+                                        Nouvelles notes
+                                    </strong>
+
+                                    <span>
+                                        Recevoir une notification lorsqu'une note est ajoutée.
+                                    </span>
+
+                                </div>
+
+
+                                <label class="interrupteur">
+
+                                    <input
+                                        type="checkbox"
+                                        checked
+                                    >
+
+                                    <span></span>
+
+                                </label>
+
+                            </div>
+
+
+                            <div class="option-parametre">
+
+                                <div>
+
+                                    <strong>
+                                        Absences
+                                    </strong>
+
+                                    <span>
+                                        Être informé lorsqu'une absence est enregistrée.
+                                    </span>
+
+                                </div>
+
+
+                                <label class="interrupteur">
+
+                                    <input
+                                        type="checkbox"
+                                        checked
+                                    >
+
+                                    <span></span>
+
+                                </label>
+
+                            </div>
+
+
+                            <div class="option-parametre">
+
+                                <div>
+
+                                    <strong>
+                                        Statistiques
+                                    </strong>
+
+                                    <span>
+                                        Recevoir les rapports périodiques de statistiques.
+                                    </span>
+
+                                </div>
+
+
+                                <label class="interrupteur">
+
+                                    <input
+                                        type="checkbox"
+                                    >
+
+                                    <span></span>
+
+                                </label>
+
+                            </div>
+
+
+                            <div class="option-parametre">
+
+                                <div>
+
+                                    <strong>
+                                        Informations système
+                                    </strong>
+
+                                    <span>
+                                        Recevoir les informations importantes concernant l'application.
+                                    </span>
+
+                                </div>
+
+
+                                <label class="interrupteur">
+
+                                    <input
+                                        type="checkbox"
+                                        checked
+                                    >
+
+                                    <span></span>
+
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+
+                    <!-- =========================
+                         APPLICATION
+                    ========================== -->
+
+                    <section
+                        id="application"
+                        class="section-parametre"
+                    >
+
+
+                        <div class="entete-section">
+
+                            <h2>
+                                Application
+                            </h2>
+
+                            <p>
+                                Configurez les préférences générales de School Management.
+                            </p>
+
+                        </div>
+
+
+                        <div class="liste-options">
+
+
+                            <div class="option-parametre">
+
+                                <div>
+
+                                    <strong>
+                                        Année scolaire
+                                    </strong>
+
+                                    <span>
+                                        Année scolaire actuellement utilisée.
+                                    </span>
+
+                                </div>
+
+
+                                <select class="select-parametre">
+
+                                    <option>
+                                        2025 - 2026
+                                    </option>
+
+                                    <option>
+                                        2026 - 2027
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="option-parametre">
+
+                                <div>
+
+                                    <strong>
+                                        Langue
+                                    </strong>
+
+                                    <span>
+                                        Langue utilisée dans l'application.
+                                    </span>
+
+                                </div>
+
+
+                                <select class="select-parametre">
+
+                                    <option>
+                                        Français
+                                    </option>
+
+                                    <option>
+                                        English
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="option-parametre">
+
+                                <div>
+
+                                    <strong>
+                                        Confirmation avant suppression
+                                    </strong>
+
+                                    <span>
+                                        Demander une confirmation avant de supprimer une donnée.
+                                    </span>
+
+                                </div>
+
+
+                                <label class="interrupteur">
+
+                                    <input
+                                        type="checkbox"
+                                        checked
+                                    >
+
+                                    <span></span>
+
+                                </label>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="zone-danger">
+
+
+                            <div>
+
+                                <strong>
+                                    Zone sensible
+                                </strong>
+
+                                <p>
+                                    Les actions de cette section peuvent affecter les données de l'application.
+                                </p>
+
+                            </div>
+
+
+                            <button
+                                type="button"
+                                class="bouton-danger"
+                            >
+
+                                <i class="fa-solid fa-trash"></i>
+
+                                Réinitialiser les paramètres
+
+                            </button>
+
+                        </div>
+
+                    </section>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <script src="js/parametres.js"></script>
+
+</body>
+
+</html>

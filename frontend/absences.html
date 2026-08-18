@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Absences - School Management</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/absences.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+</head>
+
+<body>
+
+    <div class="conteneur-principal">
+
+        <!-- =========================
+             BARRE LATERALE
+        ========================== -->
+
+        <aside class="barre-laterale">
+
+            <div class="logo-application">
+
+                <img
+                    src="image/logo.png"
+                    alt="Logo School Management"
+                >
+
+                <h2>School Management</h2>
+
+            </div>
+
+
+            <nav class="menu-navigation">
+
+                <a href="tableau-bord.html" class="lien-navigation">
+
+                    <i class="fa-solid fa-house"></i>
+
+                    <span>Tableau de bord</span>
+
+                </a>
+
+
+                <a href="students.html" class="lien-navigation">
+
+                    <i class="fa-solid fa-user-graduate"></i>
+
+                    <span>Étudiants</span>
+
+                </a>
+
+
+                <a href="teachers.html" class="lien-navigation">
+
+                    <i class="fa-solid fa-chalkboard-user"></i>
+
+                    <span>Professeurs</span>
+
+                </a>
+
+
+                <a href="subjects.html" class="lien-navigation">
+
+                    <i class="fa-solid fa-book"></i>
+
+                    <span>Matières</span>
+
+                </a>
+
+
+                <a href="grades.html" class="lien-navigation">
+
+                    <i class="fa-solid fa-pen-to-square"></i>
+
+                    <span>Notes</span>
+
+                </a>
+
+
+                <a href="absences.html" class="lien-navigation actif">
+
+                    <i class="fa-solid fa-calendar-xmark"></i>
+
+                    <span>Absences</span>
+
+                </a>
+
+
+                <a href="statistiques.html" class="lien-navigation">
+
+                    <i class="fa-solid fa-chart-column"></i>
+
+                    <span>Statistiques</span>
+
+                </a>
+
+            </nav>
+
+
+            <div class="menu-inferieur">
+
+                <a href="#" class="lien-navigation">
+
+                    <i class="fa-solid fa-gear"></i>
+
+                    <span>Paramètres</span>
+
+                </a>
+
+
+                <a
+                    href="index.html"
+                    class="lien-navigation lien-deconnexion"
+                >
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                    <span>Déconnexion</span>
+
+                </a>
+
+            </div>
+
+        </aside>
+
+
+        <!-- =========================
+             CONTENU PRINCIPAL
+        ========================== -->
+
+        <main class="contenu-principal">
+
+
+            <!-- =========================
+                 BARRE SUPERIEURE
+            ========================== -->
+
+            <header class="barre-superieure">
+
+                <div class="titre-page">
+
+                    <h1>Absences</h1>
+
+                    <p>
+                        Gérez les absences et la présence des étudiants.
+                    </p>
+
+                </div>
+
+
+                <div class="profil-utilisateur">
+
+                    <div class="icone-notification">
+
+                        <i class="fa-regular fa-bell"></i>
+
+                        <span class="badge-notification">
+                            3
+                        </span>
+
+                    </div>
+
+
+                    <div class="informations-utilisateur">
+
+                        <div class="avatar-utilisateur">
+
+                            <i class="fa-solid fa-user"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <strong id="nom-utilisateur">
+                                Administrateur
+                            </strong>
+
+                            <span id="role-utilisateur">
+                                Administrateur
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- =========================
+                 OUTILS
+            ========================== -->
+
+            <section class="outils-absences">
+
+
+                <!-- RECHERCHE -->
+
+                <div class="barre-recherche">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input
+                        type="text"
+                        id="recherche-absence"
+                        placeholder="Rechercher un étudiant..."
+                    >
+
+                </div>
+
+
+                <!-- CLASSE -->
+
+                <select
+                    id="filtre-classe"
+                    class="filtre-selection"
+                >
+
+                    <option value="">
+                        Toutes les classes
+                    </option>
+
+                    <option value="6e">
+                        6e
+                    </option>
+
+                    <option value="5e">
+                        5e
+                    </option>
+
+                    <option value="4e">
+                        4e
+                    </option>
+
+                    <option value="3e">
+                        3e
+                    </option>
+
+                    <option value="2nde">
+                        2nde
+                    </option>
+
+                    <option value="1ere">
+                        1ère
+                    </option>
+
+                    <option value="terminale">
+                        Terminale
+                    </option>
+
+                </select>
+
+
+                <!-- STATUT -->
+
+                <select
+                    id="filtre-statut"
+                    class="filtre-selection"
+                >
+
+                    <option value="">
+                        Tous les statuts
+                    </option>
+
+                    <option value="Justifiée">
+                        Justifiée
+                    </option>
+
+                    <option value="Non justifiée">
+                        Non justifiée
+                    </option>
+
+                </select>
+
+
+                <!-- AJOUTER -->
+
+                <button
+                    type="button"
+                    class="bouton-ajouter"
+                    id="bouton-ajouter-absence"
+                >
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    Enregistrer une absence
+
+                </button>
+
+            </section>
+
+
+            <!-- =========================
+                 STATISTIQUES
+            ========================== -->
+
+            <section class="statistique-absences">
+
+
+                <div class="petite-carte">
+
+                    <div class="petite-icone">
+
+                        <i class="fa-solid fa-calendar-xmark"></i>
+
+                    </div>
+
+
+                    <div class="informations-petite-carte">
+
+                        <span>
+                            Total absences
+                        </span>
+
+                        <strong id="nombre-absences">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="petite-carte">
+
+                    <div class="petite-icone">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                    </div>
+
+
+                    <div class="informations-petite-carte">
+
+                        <span>
+                            Absences justifiées
+                        </span>
+
+                        <strong id="nombre-justifiees">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="petite-carte">
+
+                    <div class="petite-icone">
+
+                        <i class="fa-solid fa-circle-exclamation"></i>
+
+                    </div>
+
+
+                    <div class="informations-petite-carte">
+
+                        <span>
+                            Non justifiées
+                        </span>
+
+                        <strong id="nombre-non-justifiees">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 TABLEAU
+            ========================== -->
+
+            <section class="carte-tableau">
+
+                <div class="entete-tableau">
+
+                    <div>
+
+                        <h2>
+                            Liste des absences
+                        </h2>
+
+                        <p>
+                            Consultez et gérez les absences des étudiants.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="conteneur-tableau">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Étudiant
+                                </th>
+
+                                <th>
+                                    Classe
+                                </th>
+
+                                <th>
+                                    Date
+                                </th>
+
+                                <th>
+                                    Motif
+                                </th>
+
+                                <th>
+                                    Statut
+                                </th>
+
+                                <th>
+                                    Actions
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="liste-absences">
+
+                            <tr class="aucune-absence">
+
+                                <td colspan="6">
+
+                                    <div class="message-vide">
+
+                                        <i class="fa-solid fa-calendar-check"></i>
+
+                                        <h3>
+                                            Aucune absence
+                                        </h3>
+
+                                        <p>
+                                            Aucune absence n'est actuellement enregistrée.
+                                        </p>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 PAGINATION
+            ========================== -->
+
+            <div class="pagination">
+
+                <button
+                    type="button"
+                    class="bouton-pagination"
+                    disabled
+                >
+
+                    <i class="fa-solid fa-chevron-left"></i>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="numero-page actif"
+                >
+                    1
+                </button>
+
+
+                <button
+                    type="button"
+                    class="bouton-pagination"
+                    disabled
+                >
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                </button>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <script src="js/absences.js"></script>
+
+</body>
+
+</html>

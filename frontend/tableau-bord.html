@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tableau de bord - School Management</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/tableau-bord.css">
+
+    <!-- Font Awesome pour les icônes -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+</head>
+
+<body>
+
+    <div class="conteneur-principal">
+
+        <!-- BARRE LATERALE -->
+        <aside class="barre-laterale">
+
+            <div class="logo-application">
+                <img src="image/logo.png" alt="Logo School Management">
+                <h2>School Management</h2>
+            </div>
+
+            <nav class="menu-navigation">
+
+                <a href="tableau-bord.html" class="lien-navigation actif">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Tableau de bord</span>
+                </a>
+
+                <a href="#" class="lien-navigation">
+                    <i class="fa-solid fa-user-graduate"></i>
+                    <span>Étudiants</span>
+                </a>
+
+                <a href="#" class="lien-navigation">
+                    <i class="fa-solid fa-chalkboard-user"></i>
+                    <span>Professeurs</span>
+                </a>
+
+                <a href="#" class="lien-navigation">
+                    <i class="fa-solid fa-book"></i>
+                    <span>Matières</span>
+                </a>
+
+                <a href="#" class="lien-navigation">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    <span>Notes</span>
+                </a>
+
+                <a href="#" class="lien-navigation">
+                    <i class="fa-solid fa-calendar-xmark"></i>
+                    <span>Absences</span>
+                </a>
+
+                <a href="#" class="lien-navigation">
+                    <i class="fa-solid fa-chart-column"></i>
+                    <span>Statistiques</span>
+                </a>
+
+            </nav>
+
+            <div class="menu-inferieur">
+
+                <a href="#" class="lien-navigation">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Paramètres</span>
+                </a>
+
+                <a href="index.html" class="lien-navigation lien-deconnexion">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Déconnexion</span>
+                </a>
+
+            </div>
+
+        </aside>
+
+
+        <!-- CONTENU PRINCIPAL -->
+        <main class="contenu-principal">
+
+            <!-- EN-TÊTE -->
+            <header class="barre-superieure">
+
+                <div class="titre-page">
+                    <h1>Tableau de bord</h1>
+                    <p>Bienvenue sur votre espace de gestion scolaire.</p>
+                </div>
+
+                <div class="profil-utilisateur">
+
+                    <div class="icone-notification">
+                        <i class="fa-regular fa-bell"></i>
+                        <span class="badge-notification">3</span>
+                    </div>
+
+                    <div class="informations-utilisateur">
+                        <div class="avatar-utilisateur">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+
+                        <div>
+                            <strong id="nom-utilisateur">Administrateur</strong>
+                            <span id="role-utilisateur">Administrateur</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- CARTES STATISTIQUES -->
+            <section class="section-statistiques">
+
+                <div class="carte-statistique">
+
+                    <div class="icone-carte icone-etudiants">
+                        <i class="fa-solid fa-user-graduate"></i>
+                    </div>
+
+                    <div class="informations-carte">
+                        <span>Total étudiants</span>
+                        <strong id="total-etudiants">0</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="carte-statistique">
+
+                    <div class="icone-carte icone-professeurs">
+                        <i class="fa-solid fa-chalkboard-user"></i>
+                    </div>
+
+                    <div class="informations-carte">
+                        <span>Total professeurs</span>
+                        <strong id="total-professeurs">0</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="carte-statistique">
+
+                    <div class="icone-carte icone-matieres">
+                        <i class="fa-solid fa-book"></i>
+                    </div>
+
+                    <div class="informations-carte">
+                        <span>Total matières</span>
+                        <strong id="total-matieres">0</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="carte-statistique">
+
+                    <div class="icone-carte icone-absences">
+                        <i class="fa-solid fa-calendar-xmark"></i>
+                    </div>
+
+                    <div class="informations-carte">
+                        <span>Absences</span>
+                        <strong id="total-absences">0</strong>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- CONTENU DU TABLEAU DE BORD -->
+            <section class="contenu-tableau-bord">
+
+                <!-- BIENVENUE -->
+                <div class="carte-bienvenue">
+
+                    <div class="texte-bienvenue">
+
+                        <span class="petit-titre">GESTION SCOLAIRE</span>
+
+                        <h2>
+                            Gérez votre établissement
+                            <span>simplement.</span>
+                        </h2>
+
+                        <p>
+                            Retrouvez rapidement les étudiants, les professeurs,
+                            les matières, les notes et les absences de votre établissement.
+                        </p>
+
+                        <button class="bouton-principal">
+                            <i class="fa-solid fa-arrow-right"></i>
+                            Commencer
+                        </button>
+
+                    </div>
+
+                    <div class="illustration-bienvenue">
+                        <i class="fa-solid fa-school"></i>
+                    </div>
+
+                </div>
+
+
+                <!-- ACTIVITES RECENTES -->
+                <div class="carte-activites">
+
+                    <div class="entete-carte">
+                        <div>
+                            <h3>Activités récentes</h3>
+                            <p>Les dernières actions effectuées</p>
+                        </div>
+
+                        <button class="bouton-voir-tout">
+                            Voir tout
+                        </button>
+                    </div>
+
+
+                    <div class="liste-activites">
+
+                        <div class="activite">
+
+                            <div class="icone-activite">
+                                <i class="fa-solid fa-user-plus"></i>
+                            </div>
+
+                            <div class="texte-activite">
+                                <strong>Nouvel étudiant ajouté</strong>
+                                <span>Aucune activité récente</span>
+                            </div>
+
+                            <span class="heure-activite">--</span>
+
+                        </div>
+
+
+                        <div class="activite">
+
+                            <div class="icone-activite">
+                                <i class="fa-solid fa-pen"></i>
+                            </div>
+
+                            <div class="texte-activite">
+                                <strong>Nouvelle note enregistrée</strong>
+                                <span>Aucune activité récente</span>
+                            </div>
+
+                            <span class="heure-activite">--</span>
+
+                        </div>
+
+
+                        <div class="activite">
+
+                            <div class="icone-activite">
+                                <i class="fa-solid fa-calendar-xmark"></i>
+                            </div>
+
+                            <div class="texte-activite">
+                                <strong>Absence enregistrée</strong>
+                                <span>Aucune activité récente</span>
+                            </div>
+
+                            <span class="heure-activite">--</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="js/tableau-bord.js"></script>
+
+</body>
+</html>

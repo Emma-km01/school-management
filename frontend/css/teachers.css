@@ -1,0 +1,770 @@
+/* ==============================
+   PAGE TEACHERS
+   ============================== */
+
+body {
+    margin: 0;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background-color: #f8f6fb;
+
+    color: #2d2340;
+}
+
+
+/* ==============================
+   STRUCTURE
+   ============================== */
+
+.conteneur-principal {
+    display: flex;
+
+    min-height: 100vh;
+}
+
+
+/* ==============================
+   BARRE LATERALE
+   ============================== */
+
+.barre-laterale {
+    width: 250px;
+
+    min-height: 100vh;
+
+    background: linear-gradient(
+        180deg,
+        #7b2cbf,
+        #9d4edd
+    );
+
+    color: white;
+
+    display: flex;
+
+    flex-direction: column;
+
+    position: fixed;
+
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+
+
+.logo-application {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 25px 20px;
+}
+
+
+.logo-application img {
+    width: 45px;
+
+    height: 45px;
+
+    object-fit: contain;
+}
+
+
+.logo-application h2 {
+    font-size: 17px;
+
+    margin: 0;
+}
+
+
+/* ==============================
+   NAVIGATION
+   ============================== */
+
+.menu-navigation {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+    padding: 20px 15px;
+}
+
+
+.lien-navigation {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 13px 15px;
+
+    color: rgba(
+        255,
+        255,
+        255,
+        0.85
+    );
+
+    text-decoration: none;
+
+    border-radius: 10px;
+
+    transition: 0.3s;
+}
+
+
+.lien-navigation i {
+    width: 20px;
+
+    text-align: center;
+}
+
+
+.lien-navigation:hover,
+.lien-navigation.actif {
+    background-color: rgba(
+        255,
+        255,
+        255,
+        0.18
+    );
+
+    color: white;
+}
+
+
+.menu-inferieur {
+    margin-top: auto;
+
+    padding: 15px;
+}
+
+
+/* ==============================
+   CONTENU
+   ============================== */
+
+.contenu-principal {
+    margin-left: 250px;
+
+    width: calc(100% - 250px);
+
+    padding: 30px;
+
+    box-sizing: border-box;
+}
+
+
+/* ==============================
+   BARRE SUPERIEURE
+   ============================== */
+
+.barre-superieure {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 30px;
+}
+
+
+.titre-page h1 {
+    margin: 0 0 7px;
+
+    font-size: 28px;
+}
+
+
+.titre-page p {
+    margin: 0;
+
+    color: #777;
+}
+
+
+/* ==============================
+   PROFIL
+   ============================== */
+
+.profil-utilisateur {
+    display: flex;
+
+    align-items: center;
+
+    gap: 25px;
+}
+
+
+.icone-notification {
+    position: relative;
+
+    font-size: 20px;
+
+    color: #6f42c1;
+}
+
+
+.badge-notification {
+    position: absolute;
+
+    top: -8px;
+    right: -8px;
+
+    width: 17px;
+    height: 17px;
+
+    border-radius: 50%;
+
+    background-color: #e6397f;
+
+    color: white;
+
+    font-size: 10px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+.informations-utilisateur {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+.informations-utilisateur > div:last-child {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+
+.informations-utilisateur span {
+    font-size: 12px;
+
+    color: #777;
+}
+
+
+.avatar-utilisateur {
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    background: linear-gradient(
+        135deg,
+        #7b2cbf,
+        #e056fd
+    );
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+}
+
+
+/* ==============================
+   OUTILS
+   ============================== */
+
+.outils-teachers {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 25px;
+}
+
+
+.barre-recherche {
+    flex: 1;
+
+    max-width: 450px;
+
+    height: 45px;
+
+    background-color: white;
+
+    border: 1px solid #e7e1ef;
+
+    border-radius: 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 15px;
+
+    box-sizing: border-box;
+}
+
+
+.barre-recherche i {
+    color: #9b8da9;
+
+    margin-right: 10px;
+}
+
+
+.barre-recherche input {
+    width: 100%;
+
+    border: none;
+
+    outline: none;
+
+    font-size: 14px;
+
+    background: transparent;
+}
+
+
+.filtre-matiere {
+    height: 45px;
+
+    padding: 0 15px;
+
+    border: 1px solid #e7e1ef;
+
+    border-radius: 10px;
+
+    background-color: white;
+
+    color: #4b3d59;
+
+    outline: none;
+
+    cursor: pointer;
+}
+
+
+.bouton-ajouter {
+    height: 45px;
+
+    padding: 0 18px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: linear-gradient(
+        135deg,
+        #7b2cbf,
+        #9d4edd
+    );
+
+    color: white;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    transition: 0.3s;
+}
+
+
+.bouton-ajouter:hover {
+    transform: translateY(-2px);
+}
+
+
+/* ==============================
+   STATISTIQUES
+   ============================== */
+
+.statistique-teachers {
+    display: grid;
+
+    grid-template-columns: repeat(
+        3,
+        1fr
+    );
+
+    gap: 20px;
+
+    margin-bottom: 25px;
+}
+
+
+.petite-carte {
+    background-color: white;
+
+    border-radius: 14px;
+
+    padding: 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    box-shadow: 0 5px 20px rgba(
+        80,
+        40,
+        120,
+        0.07
+    );
+}
+
+
+.petite-icone {
+    width: 45px;
+    height: 45px;
+
+    border-radius: 10px;
+
+    background-color: #f0ddff;
+
+    color: #7b2cbf;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+.informations-petite-carte {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+
+.informations-petite-carte span {
+    font-size: 12px;
+
+    color: #777;
+}
+
+
+.informations-petite-carte strong {
+    font-size: 22px;
+}
+
+
+/* ==============================
+   TABLEAU
+   ============================== */
+
+.carte-tableau {
+    background-color: white;
+
+    border-radius: 16px;
+
+    box-shadow: 0 5px 20px rgba(
+        80,
+        40,
+        120,
+        0.07
+    );
+
+    overflow: hidden;
+}
+
+
+.entete-tableau {
+    padding: 22px 25px;
+
+    border-bottom: 1px solid #eee;
+}
+
+
+.entete-tableau h2 {
+    margin: 0 0 5px;
+
+    font-size: 18px;
+}
+
+
+.entete-tableau p {
+    margin: 0;
+
+    font-size: 13px;
+
+    color: #888;
+}
+
+
+.conteneur-tableau {
+    overflow-x: auto;
+}
+
+
+table {
+    width: 100%;
+
+    border-collapse: collapse;
+}
+
+
+thead {
+    background-color: #faf8fc;
+}
+
+
+th {
+    padding: 15px 20px;
+
+    text-align: left;
+
+    font-size: 12px;
+
+    color: #777;
+
+    font-weight: 600;
+}
+
+
+td {
+    padding: 16px 20px;
+
+    border-top: 1px solid #f0edf3;
+
+    font-size: 13px;
+}
+
+
+/* ==============================
+   MESSAGE VIDE
+   ============================== */
+
+.message-vide {
+    padding: 50px 20px;
+
+    text-align: center;
+
+    color: #999;
+}
+
+
+.message-vide i {
+    font-size: 40px;
+
+    color: #c59be8;
+
+    margin-bottom: 10px;
+}
+
+
+.message-vide h3 {
+    margin: 5px 0;
+
+    color: #5c4b68;
+}
+
+
+.message-vide p {
+    margin: 0;
+
+    font-size: 13px;
+}
+
+
+/* ==============================
+   STATUT
+   ============================== */
+
+.statut-actif {
+    display: inline-block;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    background-color: #e8f8ef;
+
+    color: #198754;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+
+/* ==============================
+   ACTIONS
+   ============================== */
+
+.bouton-action {
+    width: 32px;
+    height: 32px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    margin-right: 5px;
+}
+
+
+.bouton-modifier {
+    background-color: #f0e5ff;
+
+    color: #7b2cbf;
+}
+
+
+.bouton-supprimer {
+    background-color: #ffe5e5;
+
+    color: #dc3545;
+}
+
+
+/* ==============================
+   PAGINATION
+   ============================== */
+
+.pagination {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-top: 25px;
+}
+
+
+.bouton-pagination,
+.numero-page {
+    width: 38px;
+    height: 38px;
+
+    border: 1px solid #e7e1ef;
+
+    background-color: white;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+}
+
+
+.numero-page.actif {
+    background-color: #7b2cbf;
+
+    color: white;
+
+    border-color: #7b2cbf;
+}
+
+
+.bouton-pagination:disabled {
+    opacity: 0.4;
+
+    cursor: not-allowed;
+}
+
+
+/* ==============================
+   RESPONSIVE
+   ============================== */
+
+@media (max-width: 1000px) {
+
+    .statistique-teachers {
+        grid-template-columns: 1fr;
+    }
+
+
+    .outils-teachers {
+        flex-wrap: wrap;
+    }
+
+
+    .barre-recherche {
+        max-width: none;
+
+        width: 100%;
+    }
+}
+
+
+@media (max-width: 750px) {
+
+    .barre-laterale {
+        width: 70px;
+    }
+
+
+    .logo-application h2,
+    .lien-navigation span {
+        display: none;
+    }
+
+
+    .logo-application {
+        justify-content: center;
+    }
+
+
+    .contenu-principal {
+        margin-left: 70px;
+
+        width: calc(100% - 70px);
+
+        padding: 20px;
+    }
+}
+
+
+@media (max-width: 550px) {
+
+    .titre-page h1 {
+        font-size: 22px;
+    }
+
+
+    .informations-utilisateur > div:last-child {
+        display: none;
+    }
+
+
+    .outils-teachers {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    .filtre-matiere,
+    .bouton-ajouter {
+        width: 100%;
+    }
+}

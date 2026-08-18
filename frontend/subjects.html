@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Matières - School Management</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/subjects.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+</head>
+
+<body>
+
+    <div class="conteneur-principal">
+
+        <!-- =========================
+             BARRE LATERALE
+        ========================== -->
+
+        <aside class="barre-laterale">
+
+            <div class="logo-application">
+
+                <img
+                    src="image/logo.png"
+                    alt="Logo School Management"
+                >
+
+                <h2>School Management</h2>
+
+            </div>
+
+
+            <nav class="menu-navigation">
+
+                <a href="tableau-bord.html" class="lien-navigation">
+
+                    <i class="fa-solid fa-house"></i>
+
+                    <span>Tableau de bord</span>
+
+                </a>
+
+
+                <a href="students.html" class="lien-navigation">
+
+                    <i class="fa-solid fa-user-graduate"></i>
+
+                    <span>Étudiants</span>
+
+                </a>
+
+
+                <a href="teachers.html" class="lien-navigation">
+
+                    <i class="fa-solid fa-chalkboard-user"></i>
+
+                    <span>Professeurs</span>
+
+                </a>
+
+
+                <a href="subjects.html" class="lien-navigation actif">
+
+                    <i class="fa-solid fa-book"></i>
+
+                    <span>Matières</span>
+
+                </a>
+
+
+                <a href="grades.html" class="lien-navigation">
+
+                    <i class="fa-solid fa-pen-to-square"></i>
+
+                    <span>Notes</span>
+
+                </a>
+
+
+                <a href="absences.html" class="lien-navigation">
+
+                    <i class="fa-solid fa-calendar-xmark"></i>
+
+                    <span>Absences</span>
+
+                </a>
+
+
+                <a href="statistiques.html" class="lien-navigation">
+
+                    <i class="fa-solid fa-chart-column"></i>
+
+                    <span>Statistiques</span>
+
+                </a>
+
+            </nav>
+
+
+            <div class="menu-inferieur">
+
+                <a href="#" class="lien-navigation">
+
+                    <i class="fa-solid fa-gear"></i>
+
+                    <span>Paramètres</span>
+
+                </a>
+
+
+                <a
+                    href="index.html"
+                    class="lien-navigation lien-deconnexion"
+                >
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                    <span>Déconnexion</span>
+
+                </a>
+
+            </div>
+
+        </aside>
+
+
+        <!-- =========================
+             CONTENU PRINCIPAL
+        ========================== -->
+
+        <main class="contenu-principal">
+
+
+            <!-- =========================
+                 BARRE SUPERIEURE
+            ========================== -->
+
+            <header class="barre-superieure">
+
+                <div class="titre-page">
+
+                    <h1>Matières</h1>
+
+                    <p>
+                        Gérez les matières enseignées dans votre établissement.
+                    </p>
+
+                </div>
+
+
+                <div class="profil-utilisateur">
+
+                    <div class="icone-notification">
+
+                        <i class="fa-regular fa-bell"></i>
+
+                        <span class="badge-notification">
+                            3
+                        </span>
+
+                    </div>
+
+
+                    <div class="informations-utilisateur">
+
+                        <div class="avatar-utilisateur">
+
+                            <i class="fa-solid fa-user"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <strong id="nom-utilisateur">
+                                Administrateur
+                            </strong>
+
+                            <span id="role-utilisateur">
+                                Administrateur
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- =========================
+                 OUTILS
+            ========================== -->
+
+            <section class="outils-subjects">
+
+                <div class="barre-recherche">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input
+                        type="text"
+                        id="recherche-subject"
+                        placeholder="Rechercher une matière..."
+                    >
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="bouton-ajouter"
+                    id="bouton-ajouter-subject"
+                >
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    Ajouter une matière
+
+                </button>
+
+            </section>
+
+
+            <!-- =========================
+                 STATISTIQUES
+            ========================== -->
+
+            <section class="statistique-subjects">
+
+
+                <div class="petite-carte">
+
+                    <div class="petite-icone">
+
+                        <i class="fa-solid fa-book"></i>
+
+                    </div>
+
+
+                    <div class="informations-petite-carte">
+
+                        <span>
+                            Total matières
+                        </span>
+
+                        <strong id="nombre-subjects">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="petite-carte">
+
+                    <div class="petite-icone">
+
+                        <i class="fa-solid fa-chalkboard-user"></i>
+
+                    </div>
+
+
+                    <div class="informations-petite-carte">
+
+                        <span>
+                            Matières enseignées
+                        </span>
+
+                        <strong id="nombre-enseignees">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="petite-carte">
+
+                    <div class="petite-icone">
+
+                        <i class="fa-solid fa-users"></i>
+
+                    </div>
+
+
+                    <div class="informations-petite-carte">
+
+                        <span>
+                            Professeurs affectés
+                        </span>
+
+                        <strong id="nombre-professeurs">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 LISTE DES MATIERES
+            ========================== -->
+
+            <section class="carte-tableau">
+
+                <div class="entete-tableau">
+
+                    <div>
+
+                        <h2>
+                            Liste des matières
+                        </h2>
+
+                        <p>
+                            Consultez et gérez les matières de l'établissement.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="conteneur-tableau">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Matière
+                                </th>
+
+                                <th>
+                                    Code
+                                </th>
+
+                                <th>
+                                    Coefficient
+                                </th>
+
+                                <th>
+                                    Professeur
+                                </th>
+
+                                <th>
+                                    Statut
+                                </th>
+
+                                <th>
+                                    Actions
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="liste-subjects">
+
+                            <tr class="aucun-subject">
+
+                                <td colspan="6">
+
+                                    <div class="message-vide">
+
+                                        <i class="fa-solid fa-book-open"></i>
+
+                                        <h3>
+                                            Aucune matière
+                                        </h3>
+
+                                        <p>
+                                            Aucune matière n'est actuellement enregistrée.
+                                        </p>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 PAGINATION
+            ========================== -->
+
+            <div class="pagination">
+
+                <button
+                    type="button"
+                    class="bouton-pagination"
+                    disabled
+                >
+
+                    <i class="fa-solid fa-chevron-left"></i>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="numero-page actif"
+                >
+                    1
+                </button>
+
+
+                <button
+                    type="button"
+                    class="bouton-pagination"
+                    disabled
+                >
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                </button>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <script src="js/subjects.js"></script>
+
+</body>
+
+</html>

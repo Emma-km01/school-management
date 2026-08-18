@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Statistiques - School Management</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/statistiques.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+</head>
+
+<body>
+
+    <div class="conteneur-principal">
+
+        <!-- =========================
+             BARRE LATERALE
+        ========================== -->
+
+        <aside class="barre-laterale">
+
+            <div class="logo-application">
+
+                <img
+                    src="image/logo.png"
+                    alt="Logo School Management"
+                >
+
+                <h2>School Management</h2>
+
+            </div>
+
+
+            <nav class="menu-navigation">
+
+                <a href="tableau-bord.html" class="lien-navigation">
+
+                    <i class="fa-solid fa-house"></i>
+
+                    <span>Tableau de bord</span>
+
+                </a>
+
+
+                <a href="students.html" class="lien-navigation">
+
+                    <i class="fa-solid fa-user-graduate"></i>
+
+                    <span>Étudiants</span>
+
+                </a>
+
+
+                <a href="teachers.html" class="lien-navigation">
+
+                    <i class="fa-solid fa-chalkboard-user"></i>
+
+                    <span>Professeurs</span>
+
+                </a>
+
+
+                <a href="subjects.html" class="lien-navigation">
+
+                    <i class="fa-solid fa-book"></i>
+
+                    <span>Matières</span>
+
+                </a>
+
+
+                <a href="grades.html" class="lien-navigation">
+
+                    <i class="fa-solid fa-pen-to-square"></i>
+
+                    <span>Notes</span>
+
+                </a>
+
+
+                <a href="absences.html" class="lien-navigation">
+
+                    <i class="fa-solid fa-calendar-xmark"></i>
+
+                    <span>Absences</span>
+
+                </a>
+
+
+                <a href="statistiques.html" class="lien-navigation actif">
+
+                    <i class="fa-solid fa-chart-column"></i>
+
+                    <span>Statistiques</span>
+
+                </a>
+
+            </nav>
+
+
+            <div class="menu-inferieur">
+
+                <a href="#" class="lien-navigation">
+
+                    <i class="fa-solid fa-gear"></i>
+
+                    <span>Paramètres</span>
+
+                </a>
+
+
+                <a
+                    href="index.html"
+                    class="lien-navigation lien-deconnexion"
+                >
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                    <span>Déconnexion</span>
+
+                </a>
+
+            </div>
+
+        </aside>
+
+
+        <!-- =========================
+             CONTENU PRINCIPAL
+        ========================== -->
+
+        <main class="contenu-principal">
+
+
+            <!-- =========================
+                 BARRE SUPERIEURE
+            ========================== -->
+
+            <header class="barre-superieure">
+
+                <div class="titre-page">
+
+                    <h1>Statistiques</h1>
+
+                    <p>
+                        Consultez les performances générales de l'établissement.
+                    </p>
+
+                </div>
+
+
+                <div class="profil-utilisateur">
+
+                    <div class="icone-notification">
+
+                        <i class="fa-regular fa-bell"></i>
+
+                        <span class="badge-notification">
+                            3
+                        </span>
+
+                    </div>
+
+
+                    <div class="informations-utilisateur">
+
+                        <div class="avatar-utilisateur">
+
+                            <i class="fa-solid fa-user"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <strong id="nom-utilisateur">
+                                Administrateur
+                            </strong>
+
+                            <span id="role-utilisateur">
+                                Administrateur
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- =========================
+                 FILTRES
+            ========================== -->
+
+            <section class="filtres-statistiques">
+
+                <div>
+
+                    <label for="filtre-classe">
+                        Classe
+                    </label>
+
+                    <select id="filtre-classe">
+
+                        <option value="">
+                            Toutes les classes
+                        </option>
+
+                        <option value="6e">
+                            6e
+                        </option>
+
+                        <option value="5e">
+                            5e
+                        </option>
+
+                        <option value="4e">
+                            4e
+                        </option>
+
+                        <option value="3e">
+                            3e
+                        </option>
+
+                        <option value="2nde">
+                            2nde
+                        </option>
+
+                        <option value="1ere">
+                            1ère
+                        </option>
+
+                        <option value="terminale">
+                            Terminale
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div>
+
+                    <label for="filtre-periode">
+                        Période
+                    </label>
+
+                    <select id="filtre-periode">
+
+                        <option value="annee">
+                            Année scolaire
+                        </option>
+
+                        <option value="trimestre1">
+                            1er trimestre
+                        </option>
+
+                        <option value="trimestre2">
+                            2e trimestre
+                        </option>
+
+                        <option value="trimestre3">
+                            3e trimestre
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 CARTES PRINCIPALES
+            ========================== -->
+
+            <section class="cartes-statistiques">
+
+
+                <div class="carte-statistique">
+
+                    <div class="icone-statistique">
+
+                        <i class="fa-solid fa-chart-line"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Moyenne générale
+                        </span>
+
+                        <strong id="moyenne-generale">
+                            0,00 / 20
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="carte-statistique">
+
+                    <div class="icone-statistique">
+
+                        <i class="fa-solid fa-trophy"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Meilleur étudiant
+                        </span>
+
+                        <strong id="meilleur-etudiant">
+                            Aucun
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="carte-statistique">
+
+                    <div class="icone-statistique">
+
+                        <i class="fa-solid fa-calendar-xmark"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Total absences
+                        </span>
+
+                        <strong id="total-absences">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="carte-statistique">
+
+                    <div class="icone-statistique">
+
+                        <i class="fa-solid fa-user-graduate"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Total étudiants
+                        </span>
+
+                        <strong id="total-etudiants">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 GRAPHIQUES
+            ========================== -->
+
+            <section class="zone-graphiques">
+
+
+                <!-- PERFORMANCE -->
+
+                <div class="carte-graphique">
+
+                    <div class="entete-graphique">
+
+                        <div>
+
+                            <h2>
+                                Performance générale
+                            </h2>
+
+                            <p>
+                                Évolution des moyennes
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="graphique">
+
+                        <div class="barre-graphique">
+
+                            <span>
+                                T1
+                            </span>
+
+                            <div
+                                class="barre"
+                                style="height: 55%;"
+                            ></div>
+
+                            <strong>
+                                11
+                            </strong>
+
+                        </div>
+
+
+                        <div class="barre-graphique">
+
+                            <span>
+                                T2
+                            </span>
+
+                            <div
+                                class="barre"
+                                style="height: 68%;"
+                            ></div>
+
+                            <strong>
+                                13,6
+                            </strong>
+
+                        </div>
+
+
+                        <div class="barre-graphique">
+
+                            <span>
+                                T3
+                            </span>
+
+                            <div
+                                class="barre"
+                                style="height: 78%;"
+                            ></div>
+
+                            <strong>
+                                15,6
+                            </strong>
+
+                        </div>
+
+
+                        <div class="barre-graphique">
+
+                            <span>
+                                Année
+                            </span>
+
+                            <div
+                                class="barre"
+                                style="height: 72%;"
+                            ></div>
+
+                            <strong>
+                                14,4
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RÉPARTITION -->
+
+                <div class="carte-graphique">
+
+                    <div class="entete-graphique">
+
+                        <div>
+
+                            <h2>
+                                Résultats
+                            </h2>
+
+                            <p>
+                                Répartition des étudiants
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="repartition">
+
+                        <div class="cercle-statistique">
+
+                            <div>
+
+                                <strong id="taux-reussite">
+                                    0%
+                                </strong>
+
+                                <span>
+                                    Réussite
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="legende">
+
+                            <div class="element-legende">
+
+                                <span class="point-reussite"></span>
+
+                                <div>
+
+                                    <strong>
+                                        Admis
+                                    </strong>
+
+                                    <span id="nombre-admis">
+                                        0 étudiants
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="element-legende">
+
+                                <span class="point-echec"></span>
+
+                                <div>
+
+                                    <strong>
+                                        Non admis
+                                    </strong>
+
+                                    <span id="nombre-non-admis">
+                                        0 étudiants
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 MEILLEURS ÉTUDIANTS
+            ========================== -->
+
+            <section class="carte-tableau">
+
+                <div class="entete-tableau">
+
+                    <div>
+
+                        <h2>
+                            Meilleurs étudiants
+                        </h2>
+
+                        <p>
+                            Classement selon la moyenne générale.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="conteneur-tableau">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Rang
+                                </th>
+
+                                <th>
+                                    Étudiant
+                                </th>
+
+                                <th>
+                                    Classe
+                                </th>
+
+                                <th>
+                                    Moyenne
+                                </th>
+
+                                <th>
+                                    Mention
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="liste-meilleurs-etudiants">
+
+                            <tr>
+
+                                <td colspan="5">
+
+                                    <div class="message-vide">
+
+                                        <i class="fa-solid fa-chart-column"></i>
+
+                                        <h3>
+                                            Aucune donnée
+                                        </h3>
+
+                                        <p>
+                                            Les statistiques apparaîtront lorsque les données seront disponibles.
+                                        </p>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <script src="js/statistiques.js"></script>
+
+</body>
+
+</html>

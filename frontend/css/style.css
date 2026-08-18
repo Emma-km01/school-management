@@ -1,0 +1,918 @@
+
+/* =========================================
+   RÉINITIALISATION
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+
+body {
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #f8f7fc;
+
+    color: #28133f;
+}
+
+
+/* =========================================
+   PAGE DE CONNEXION
+========================================= */
+
+.page-connexion {
+
+    min-height: 100vh;
+
+    width: 100%;
+
+    display: flex;
+
+    overflow: hidden;
+}
+
+
+/* =========================================
+   PARTIE PRÉSENTATION
+========================================= */
+
+.partie-presentation {
+
+    position: relative;
+
+    width: 48%;
+
+    min-height: 100vh;
+
+    padding: 40px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    overflow: hidden;
+
+    color: white;
+
+
+    background:
+
+        radial-gradient(
+            circle at 15% 85%,
+            rgba(255, 60, 166, 0.90),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            circle at 85% 15%,
+            rgba(126, 43, 236, 0.90),
+            transparent 40%
+        ),
+
+        linear-gradient(
+            135deg,
+            #42168e 0%,
+            #6925c1 48%,
+            #d52e92 100%
+        );
+}
+
+
+/* =========================================
+   FORMES DÉCORATIVES DU FOND
+========================================= */
+
+.partie-presentation::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 550px;
+
+    height: 550px;
+
+    right: -300px;
+
+    bottom: -250px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 255, 255, 0.055);
+
+    pointer-events: none;
+}
+
+
+.partie-presentation::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 400px;
+
+    height: 400px;
+
+    left: -260px;
+
+    top: 35%;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 255, 255, 0.045);
+
+    pointer-events: none;
+}
+
+
+/* =========================================
+   PETITES ICÔNES DÉCORATIVES
+========================================= */
+
+.decoration {
+
+    position: absolute;
+
+    z-index: 1;
+
+    color: white;
+
+    opacity: 0.055;
+
+    pointer-events: none;
+
+    user-select: none;
+
+    font-size: 42px;
+
+    transition: transform 0.3s ease;
+}
+
+
+.decoration-crayon {
+
+    top: 9%;
+
+    left: 8%;
+
+    transform: rotate(-20deg);
+}
+
+
+.decoration-livre {
+
+    top: 16%;
+
+    right: 10%;
+
+    font-size: 48px;
+
+    transform: rotate(12deg);
+}
+
+
+.decoration-diplome {
+
+    top: 42%;
+
+    right: 8%;
+
+    font-size: 46px;
+
+    transform: rotate(10deg);
+}
+
+
+.decoration-etoile {
+
+    top: 32%;
+
+    left: 7%;
+
+    font-size: 30px;
+
+    transform: rotate(10deg);
+}
+
+
+.decoration-regle {
+
+    bottom: 18%;
+
+    left: 10%;
+
+    font-size: 42px;
+
+    transform: rotate(20deg);
+}
+
+
+.decoration-cahier {
+
+    bottom: 12%;
+
+    right: 15%;
+
+    font-size: 42px;
+
+    transform: rotate(-12deg);
+}
+
+
+.decoration-calculatrice {
+
+    bottom: 38%;
+
+    right: 30%;
+
+    font-size: 34px;
+
+    transform: rotate(8deg);
+}
+
+
+.decoration-puzzle {
+
+    top: 58%;
+
+    left: 18%;
+
+    font-size: 32px;
+
+    transform: rotate(-15deg);
+}
+
+
+/* =========================================
+   CONTENU DE PRÉSENTATION
+========================================= */
+
+.contenu-presentation {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+
+    text-align: center;
+
+    margin-top: 30px;
+}
+
+
+/* =========================================
+   LOGO
+========================================= */
+
+.conteneur-logo {
+
+    width: 300px;
+
+    max-width: 80%;
+
+    margin: 0 auto;
+}
+
+
+.conteneur-logo img {
+
+    display: block;
+
+    width: 100%;
+
+    height: auto;
+
+    object-fit: contain;
+}
+
+
+/* =========================================
+   DESCRIPTION
+========================================= */
+
+.description-presentation {
+
+    width: 100%;
+
+    max-width: 470px;
+
+    margin: 15px auto 0;
+}
+
+
+.description-presentation h1 {
+
+    font-size: 26px;
+
+    line-height: 1.3;
+
+    font-weight: 700;
+
+    margin-bottom: 13px;
+}
+
+
+.description-presentation p {
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+    opacity: 0.86;
+}
+
+
+/* =========================================
+   DROITS D'AUTEUR
+========================================= */
+
+.droits-auteur {
+
+    position: relative;
+
+    z-index: 2;
+
+    text-align: center;
+
+    font-size: 12px;
+
+    opacity: 0.75;
+}
+
+
+.droits-auteur span {
+
+    display: block;
+
+    margin-top: 4px;
+}
+
+
+/* =========================================
+   SECTION CONNEXION
+========================================= */
+
+.section-connexion {
+
+    width: 52%;
+
+    min-height: 100vh;
+
+    padding: 40px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background: #faf9fd;
+}
+
+
+/* =========================================
+   CARTE DE CONNEXION
+========================================= */
+
+.carte-connexion {
+
+    width: 100%;
+
+    max-width: 440px;
+
+    padding: 42px;
+
+    background: white;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 20px 60px
+        rgba(70, 32, 130, 0.10);
+}
+
+
+/* =========================================
+   EN-TÊTE
+========================================= */
+
+.entete-connexion {
+
+    text-align: center;
+
+    margin-bottom: 32px;
+}
+
+
+.entete-connexion h2 {
+
+    color: #42177f;
+
+    font-size: 30px;
+
+    margin-bottom: 8px;
+}
+
+
+.entete-connexion p {
+
+    color: #777;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   GROUPE DE CHAMP
+========================================= */
+
+.groupe-champ {
+
+    margin-bottom: 20px;
+}
+
+
+.groupe-champ label {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #3d3150;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================
+   CONTENEUR CHAMP
+========================================= */
+
+.conteneur-champ {
+
+    position: relative;
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+}
+
+
+/* =========================================
+   INPUT ET SELECT
+========================================= */
+
+.conteneur-champ input,
+.conteneur-champ select {
+
+    width: 100%;
+
+    height: 50px;
+
+    padding: 0 45px;
+
+    border: 1px solid #e1dbe9;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    background: white;
+
+    color: #30213d;
+
+    font-size: 13px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.conteneur-champ input::placeholder {
+
+    color: #aaa;
+}
+
+
+.conteneur-champ input:focus,
+.conteneur-champ select:focus {
+
+    border-color: #7035e5;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(112, 53, 229, 0.10);
+}
+
+
+/* =========================================
+   ICÔNE DES CHAMPS
+========================================= */
+
+.icone-champ {
+
+    position: absolute;
+
+    left: 15px;
+
+    z-index: 2;
+
+    color: #7a5aa8;
+
+    font-size: 14px;
+
+    pointer-events: none;
+}
+
+
+/* =========================================
+   SELECT
+========================================= */
+
+.conteneur-champ select {
+
+    appearance: none;
+
+    cursor: pointer;
+
+    padding-right: 45px;
+}
+
+
+.icone-select {
+
+    position: absolute;
+
+    right: 15px;
+
+    color: #7a5aa8;
+
+    font-size: 12px;
+
+    pointer-events: none;
+}
+
+
+/* =========================================
+   BOUTON AFFICHER MOT DE PASSE
+========================================= */
+
+.bouton-mot-de-passe {
+
+    position: absolute;
+
+    right: 12px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 30px;
+
+    height: 30px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: none;
+
+    background: transparent;
+
+    color: #80679e;
+
+    cursor: pointer;
+
+    font-size: 15px;
+}
+
+
+.bouton-mot-de-passe:hover {
+
+    color: #7035e5;
+}
+
+
+/* =========================================
+   MESSAGE DE CONNEXION
+========================================= */
+
+.message-connexion {
+
+    min-height: 20px;
+
+    margin-bottom: 5px;
+
+    text-align: center;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   BOUTON CONNEXION
+========================================= */
+
+.bouton-connexion {
+
+    width: 100%;
+
+    height: 50px;
+
+    margin-top: 5px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            #7135e7,
+            #f23894
+        );
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.bouton-connexion:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 25px
+        rgba(112, 53, 229, 0.25);
+}
+
+
+.bouton-connexion:active {
+
+    transform: translateY(0);
+}
+
+
+/* =========================================
+   PIED DE CONNEXION
+========================================= */
+
+.pied-connexion {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    margin-top: 22px;
+
+    color: #999;
+
+    text-align: center;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+
+.pied-connexion i {
+
+    margin-top: 2px;
+
+    color: #9a7bc2;
+}
+
+
+/* =========================================
+   ÉTAT CHARGEMENT BOUTON
+========================================= */
+
+.bouton-connexion.chargement {
+
+    cursor: wait;
+
+    opacity: 0.8;
+}
+
+
+.bouton-connexion.chargement i {
+
+    animation:
+        rotation 0.8s linear infinite;
+}
+
+
+@keyframes rotation {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* =========================================
+   TABLETTE
+========================================= */
+
+@media (max-width: 950px) {
+
+    .partie-presentation {
+
+        width: 45%;
+
+        padding: 30px;
+    }
+
+
+    .section-connexion {
+
+        width: 55%;
+
+        padding: 25px;
+    }
+
+
+    .conteneur-logo {
+
+        width: 250px;
+    }
+
+
+    .description-presentation h1 {
+
+        font-size: 22px;
+    }
+
+
+    .description-presentation p {
+
+        font-size: 13px;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 750px) {
+
+    .page-connexion {
+
+        flex-direction: column;
+
+        overflow: visible;
+    }
+
+
+    .partie-presentation {
+
+        width: 100%;
+
+        min-height: 370px;
+
+        padding: 25px;
+    }
+
+
+    .section-connexion {
+
+        width: 100%;
+
+        min-height: auto;
+
+        padding: 30px 20px;
+    }
+
+
+    .conteneur-logo {
+
+        width: 230px;
+    }
+
+
+    .description-presentation {
+
+        margin-top: 5px;
+    }
+
+
+    .description-presentation h1 {
+
+        font-size: 20px;
+    }
+
+
+    .description-presentation p {
+
+        display: none;
+    }
+
+
+    .carte-connexion {
+
+        padding: 30px 22px;
+    }
+
+
+    .decoration {
+
+        font-size: 30px;
+
+        opacity: 0.045;
+    }
+
+}
+
+
+/* =========================================
+   PETIT MOBILE
+========================================= */
+
+@media (max-width: 420px) {
+
+    .partie-presentation {
+
+        min-height: 320px;
+    }
+
+
+    .conteneur-logo {
+
+        width: 190px;
+    }
+
+
+    .description-presentation h1 {
+
+        font-size: 18px;
+    }
+
+
+    .entete-connexion h2 {
+
+        font-size: 26px;
+    }
+
+
+    .carte-connexion {
+
+        padding: 27px 20px;
+    }
+
+}
