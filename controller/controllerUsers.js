@@ -3,7 +3,8 @@ import {
     modifierUsers,
     supprimerUsers,
     rechercherUsers,
-    listerUsers
+    listerUsers,
+    connecterUsers
 } from "../services/servicesUsers.js";
 
 // Lister tous les utilisateurs
@@ -63,5 +64,30 @@ export function deleteUser(req, res) {
 
     res.json({
         message: "Utilisateur supprimé"
+    });
+}
+
+// Connecter un utilisateur
+export function loginUser(req, res) {
+
+    const {
+        username,
+        motdepasse,
+    } = req.body;
+
+    const user = connecterUsers(
+        username,
+        motdepasse,
+    );
+
+    if (!user) {
+        return res.status(401).json({
+            message: "Identifiant ou mot de passe incorrect."
+        });
+    }
+
+    res.json({
+        message: "Connexion réussie",
+        user
     });
 }

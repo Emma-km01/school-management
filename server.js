@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import routesStudents from "./routes/routesStudents.js"
 import routesTeachers from "./routes/routesTeachers.js";
 import routesSubjects from "./routes/routesSubjects.js";
@@ -9,8 +10,13 @@ import routesStatistiques from "./routes/routesStatistiques.js";
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
+// FRONTEND
+app.use(express.static("frontend"));
+
+//Route API
 app.use("/students", routesStudents);
 app.use("/teachers", routesTeachers);
 app.use("/subjects", routesSubjects);

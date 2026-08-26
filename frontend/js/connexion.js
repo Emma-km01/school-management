@@ -15,10 +15,6 @@ const champMotDePasse =
     document.getElementById("motDePasse");
 
 
-const selectionRole =
-    document.getElementById("role");
-
-
 const boutonAfficherMotDePasse =
     document.getElementById(
         "boutonAfficherMotDePasse"
@@ -141,24 +137,6 @@ formulaireConnexion.addEventListener(
             );
 
             champMotDePasse.focus();
-
-            return;
-        }
-
-
-
-        /* ==============================
-           VALIDATION RÔLE
-        =============================== */
-
-        if (!role) {
-
-            afficherMessage(
-                "Veuillez sélectionner votre rôle.",
-                "erreur"
-            );
-
-            selectionRole.focus();
 
             return;
         }

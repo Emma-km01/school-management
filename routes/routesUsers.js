@@ -5,13 +5,17 @@ import {
     getUser,
     createUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    loginUser
 } from "../controller/controllerUsers.js";
 
 const router = express.Router();
 
 // Lister tous les utilisateurs
 router.get("/", getUsers);
+
+//Connecter un utilisateur
+router.post("/login", loginUser);
 
 // Récupérer un utilisateur
 router.get("/:id", getUser);

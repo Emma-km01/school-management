@@ -35,4 +35,13 @@ function listerUsers() {
     `).all();
 }
 
-export { ajouterUsers, modifierUsers, supprimerUsers, rechercherUsers, listerUsers };
+function connecterUsers(username, motdepasse, role) {
+    return db.prepare(`
+        SELECT id, name, role, username
+        FROM users
+        WHERE username = ?
+        AND motdepasse = ?
+    `).get(username, motdepasse);
+}
+
+export { ajouterUsers, modifierUsers, supprimerUsers, rechercherUsers, listerUsers, connecterUsers };
