@@ -1,253 +1,50 @@
+const formulaire = document.getElementById("formulaireConnexion");
+const messageConnexion = document.getElementById("messageConnexion");
 
-/* =========================================
-   RÉCUPÉRATION DES ÉLÉMENTS
-========================================= */
+formulaire.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-const formulaireConnexion =
-    document.getElementById("formulaireConnexion");
+    const identifiant = document.getElementById("identifiant").value;
+    const motDePasse = document.getElementById("motDePasse").value;
 
+    try {
+        const reponse = await fetch("http://localhost:3000/users/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                username: identifiant,
+                motdepasse: motDePasse
+            })
+        });
 
-const champIdentifiant =
-    document.getElementById("identifiant");
+        const data = await reponse.json();
 
-
-const champMotDePasse =
-    document.getElementById("motDePasse");
-
-
-const boutonAfficherMotDePasse =
-    document.getElementById(
-        "boutonAfficherMotDePasse"
-    );
-
-
-const boutonConnexion =
-    document.getElementById(
-        "boutonConnexion"
-    );
-
-
-const messageConnexion =
-    document.getElementById(
-        "messageConnexion"
-    );
-
-
-
-/* =========================================
-   AFFICHER / MASQUER LE MOT DE PASSE
-========================================= */
-
-boutonAfficherMotDePasse.addEventListener(
-    "click",
-    () => {
-
-        if (
-            champMotDePasse.type ===
-            "password"
-        ) {
-
-            champMotDePasse.type = "text";
-
-
-            boutonAfficherMotDePasse.innerHTML =
-                '<i class="fa-regular fa-eye-slash"></i>';
-
-
-            boutonAfficherMotDePasse.setAttribute(
-                "aria-label",
-                "Masquer le mot de passe"
-            );
-
-        } else {
-
-            champMotDePasse.type =
-                "password";
-
-
-            boutonAfficherMotDePasse.innerHTML =
-                '<i class="fa-regular fa-eye"></i>';
-
-
-            boutonAfficherMotDePasse.setAttribute(
-                "aria-label",
-                "Afficher le mot de passe"
-            );
-
-        }
-
-    }
-);
-
-
-
-/* =========================================
-   SOUMISSION DU FORMULAIRE
-========================================= */
-
-formulaireConnexion.addEventListener(
-    "submit",
-    (evenement) => {
-
-        evenement.preventDefault();
-
-
-        /* Récupération des valeurs */
-
-        const identifiant =
-            champIdentifiant.value.trim();
-
-
-        const motDePasse =
-            champMotDePasse.value.trim();
-
-
-        const role =
-            selectionRole.value;
-
-
-
-        /* ==============================
-           VALIDATION IDENTIFIANT
-        =============================== */
-
-        if (!identifiant) {
-
-            afficherMessage(
-                "Veuillez entrer votre identifiant.",
-                "erreur"
-            );
-
-            champIdentifiant.focus();
-
+        if (!reponse.ok) {
+            messageConnexion.textContent = data.message || "Erreur de connexion";
+            messageConnexion.style.color = "red";
             return;
         }
 
+        // Connexion réussie : on stocke l'utilisateur et son rôle
+        localStorage.setItem("utilisateur", JSON.stringify(data.user));
 
+        messageConnexion.textContent = "Connexion réussie, redirection...";
+        messageConnexion.style.color = "green";
 
-        /* ==============================
-           VALIDATION MOT DE PASSE
-        =============================== */
+        // Redirection selon le rôle
+        setTimeout(() => {
+            if (data.user.role === "admin") {
+                window.location.href = "tableau-bord.html";
+            } else if (data.user.role === "teacher") {
+                window.location.href = "tableau-bord.html";
+            } else {
+                window.location.href = "tableau-bord.html";
+            }
+        }, 800);
 
-        if (!motDePasse) {
-
-            afficherMessage(
-                "Veuillez entrer votre mot de passe.",
-                "erreur"
-            );
-
-            champMotDePasse.focus();
-
-            return;
-        }
-
-
-
-        /* ==============================
-           POUR LE MOMENT
-        =============================== */
-
-        afficherMessage(
-            "Formulaire valide. La connexion sera bientôt reliée au serveur.",
-            "succes"
-        );
-
-
-        /*
-            IMPORTANT :
-
-            Pour le moment, nous ne faisons
-            aucune vérification dans SQLite.
-
-            Plus tard :
-
-            formulaire
-                ↓
-            API Express
-                ↓
-            controllerUsers.js
-                ↓
-            servicesUsers.js
-                ↓
-            SQLite
-                ↓
-            utilisateur
-                ↓
-            dashboard correspondant au rôle
-        */
-
-
-        console.log(
-            "Identifiant :",
-            identifiant
-        );
-
-
-        console.log(
-            "Rôle :",
-            role
-        );
-
+    } catch (err) {
+        messageConnexion.textContent = "Impossible de contacter le serveur.";
+        messageConnexion.style.color = "red";
+        console.error(err);
     }
-);
-
-
-
-/* =========================================
-   FONCTION AFFICHER MESSAGE
-========================================= */
-
-function afficherMessage(
-    message,
-    type
-) {
-
-    messageConnexion.textContent =
-        message;
-
-
-    if (type === "erreur") {
-
-        messageConnexion.style.color =
-            "#e63946";
-
-    } else {
-
-        messageConnexion.style.color =
-            "#7135e7";
-
-    }
-
-}
-
-
-
-/* =========================================
-   EFFACER LE MESSAGE LORS DE LA SAISIE
-========================================= */
-
-champIdentifiant.addEventListener(
-    "input",
-    effacerMessage
-);
-
-
-champMotDePasse.addEventListener(
-    "input",
-    effacerMessage
-);
-
-
-selectionRole.addEventListener(
-    "change",
-    effacerMessage
-);
-
-
-
-function effacerMessage() {
-
-    messageConnexion.textContent = "";
-
-}
-
+});

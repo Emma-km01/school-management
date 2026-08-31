@@ -1,54 +1,36 @@
-// ==============================
-// TABLEAU DE BORD
-// ==============================
-
-
-// Données temporaires
-const statistiques = {
-    etudiants: 0,
-    professeurs: 0,
-    matieres: 0,
-    absences: 0
-};
-
-
-// Affichage des statistiques
-document.getElementById("total-etudiants").textContent =
-    statistiques.etudiants;
-
-document.getElementById("total-professeurs").textContent =
-    statistiques.professeurs;
-
-document.getElementById("total-matieres").textContent =
-    statistiques.matieres;
-
-document.getElementById("total-absences").textContent =
-    statistiques.absences;
-
+const API = "http://localhost:3000";
 
 // Récupération de l'utilisateur connecté
-const utilisateur = JSON.parse(
-    localStorage.getItem("utilisateur")
-);
+const utilisateur = JSON.parse(localStorage.getItem("utilisateur"));
 
+// Protection : si pas connecté, retour à la connexion
+if (!utilisateur) {
+    window.location.href = "index.html";
+}
 
 // Affichage du nom et du rôle
-if (utilisateur) {
+document.getElementById("nom-utilisateur").textContent = utilisateur.name;
+document.getElementById("role-utilisateur").textContent = utilisateur.role;
 
-    const nomUtilisateur =
-        document.getElementById("nom-utilisateur");
+// Chargement des statistiques depuis l'API
+async function chargerStatistiques() {
+    try {
+        const [statsReponse, absencesReponse] = await Promise.all([
+            fetch(`${API}/statistiques`),
+            fetch(`${API}/absences/raw`)
+        ]);
 
-    const roleUtilisateur =
-        document.getElementById("role-utilisateur");
+        const stats = await statsReponse.json();
+        const absences = await absencesReponse.json();
 
+        document.getElementById("total-etudiants").textContent = stats.etudiants;
+        document.getElementById("total-professeurs").textContent = stats.enseignants;
+        document.getElementById("total-matieres").textContent = stats.matieres;
+        document.getElementById("total-absences").textContent = absences.length;
 
-    if (utilisateur.nom) {
-        nomUtilisateur.textContent =
-            utilisateur.nom;
-    }
-
-    if (utilisateur.role) {
-        roleUtilisateur.textContent =
-            utilisateur.role;
+    } catch (err) {
+        console.error("Erreur lors du chargement des statistiques :", err);
     }
 }
+
+chargerStatistiques();

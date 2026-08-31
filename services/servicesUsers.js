@@ -35,7 +35,7 @@ async function listerUsers() {
 
 async function connecterUsers(username, motdepasse, role) {
     const stmt = await db.prepare(`
-        SELECT id, name, role, username
+        SELECT id, name, role, username, motdepasse
         FROM users
         WHERE username = ?
         AND motdepasse = ?

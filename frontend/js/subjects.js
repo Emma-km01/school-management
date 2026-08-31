@@ -1,290 +1,163 @@
-// ==============================
-// PAGE SUBJECTS
-// ==============================
-
-
-// ==============================
-// DONNÉES TEMPORAIRES
-// ==============================
+const API = "http://localhost:3000";
 
 let subjects = [];
+let teachers = [];
 
 
-// ==============================
 // AFFICHER LES SUBJECTS
-// ==============================
+
+function nomProfesseur(teacherId) {
+    const prof = teachers.find((t) => t.id === teacherId);
+    return prof ? prof.nom : "Non affecté";
+}
 
 function afficherSubjects(listeSubjects) {
 
-    const tableau =
-        document.getElementById(
-            "liste-subjects"
-        );
-
-
+    const tableau = document.getElementById("liste-subjects");
     tableau.innerHTML = "";
 
-
-    // Aucun sujet
-
     if (listeSubjects.length === 0) {
-
         tableau.innerHTML = `
-
             <tr class="aucun-subject">
-
                 <td colspan="6">
-
                     <div class="message-vide">
-
                         <i class="fa-solid fa-book-open"></i>
-
-                        <h3>
-                            Aucune matière
-                        </h3>
-
-                        <p>
-                            Aucune matière n'est actuellement enregistrée.
-                        </p>
-
+                        <h3>Aucune matière</h3>
+                        <p>Aucune matière n'est actuellement enregistrée.</p>
                     </div>
-
                 </td>
-
             </tr>
-
         `;
-
         return;
     }
 
-
-    // Affichage des matières
-
     listeSubjects.forEach((subject) => {
 
-        const ligne =
-            document.createElement("tr");
-
+        const ligne = document.createElement("tr");
 
         ligne.innerHTML = `
-
+            <td>${subject.nom}</td>
+            <td>—</td>
+            <td>—</td>
+            <td>${nomProfesseur(subject.teacher_id)}</td>
+            <td><span class="statut-actif">Active</span></td>
             <td>
-                ${subject.nom}
-            </td>
-
-            <td>
-                ${subject.code}
-            </td>
-
-            <td>
-                ${subject.coefficient}
-            </td>
-
-            <td>
-                ${subject.professeur}
-            </td>
-
-            <td>
-
-                <span class="statut-actif">
-                    Active
-                </span>
-
-            </td>
-
-            <td>
-
-                <button
-                    type="button"
-                    class="bouton-action bouton-modifier"
-                    title="Modifier"
-                >
-
+                <button type="button" class="bouton-action bouton-modifier" title="Modifier" data-id="${subject.id}">
                     <i class="fa-solid fa-pen"></i>
-
                 </button>
-
-
-                <button
-                    type="button"
-                    class="bouton-action bouton-supprimer"
-                    title="Supprimer"
-                >
-
+                <button type="button" class="bouton-action bouton-supprimer" title="Supprimer" data-id="${subject.id}">
                     <i class="fa-solid fa-trash"></i>
-
                 </button>
-
             </td>
-
         `;
 
-
         tableau.appendChild(ligne);
-
     });
 
+    document.querySelectorAll(".bouton-supprimer").forEach((bouton) => {
+        bouton.addEventListener("click", async function () {
+            const id = this.dataset.id;
+            if (!confirm("Supprimer cette matière ?")) return;
+
+            try {
+                await fetch(`${API}/subjects/${id}`, { method: "DELETE" });
+                await chargerSubjects();
+            } catch (err) {
+                console.error("Erreur suppression :", err);
+                alert("Erreur lors de la suppression.");
+            }
+        });
+    });
 }
 
 
-// ==============================
+// CHARGER DEPUIS L'API
+
+async function chargerSubjects() {
+    try {
+        const [subjectsReponse, teachersReponse] = await Promise.all([
+            fetch(`${API}/subjects`),
+            fetch(`${API}/teachers`)
+        ]);
+
+        subjects = await subjectsReponse.json();
+        teachers = await teachersReponse.json();
+
+        afficherSubjects(subjects);
+        mettreAJourStatistiques();
+    } catch (err) {
+        console.error("Erreur lors du chargement des matières :", err);
+    }
+}
+
+
 // RECHERCHE
-// ==============================
 
-const champRecherche =
-    document.getElementById(
-        "recherche-subject"
+const champRecherche = document.getElementById("recherche-subject");
+
+champRecherche.addEventListener("input", function () {
+    const recherche = this.value.toLowerCase().trim();
+
+    const resultat = subjects.filter((subject) =>
+        subject.nom.toLowerCase().includes(recherche)
     );
 
-
-champRecherche.addEventListener(
-    "input",
-    function () {
-
-        const recherche =
-            this.value
-                .toLowerCase()
-                .trim();
+    afficherSubjects(resultat);
+});
 
 
-        const resultat =
-            subjects.filter(
-                (subject) => {
-
-                    return (
-
-                        subject.nom
-                            .toLowerCase()
-                            .includes(recherche)
-
-                        ||
-
-                        subject.code
-                            .toLowerCase()
-                            .includes(recherche)
-
-                    );
-
-                }
-            );
-
-
-        afficherSubjects(resultat);
-
-    }
-);
-
-
-// ==============================
 // BOUTON AJOUTER
-// ==============================
 
-const boutonAjouter =
-    document.getElementById(
-        "bouton-ajouter-subject"
-    );
+const boutonAjouter = document.getElementById("bouton-ajouter-subject");
 
+boutonAjouter.addEventListener("click", async function () {
 
-boutonAjouter.addEventListener(
-    "click",
-    function () {
+    const nom = prompt("Nom de la matière :");
+    if (!nom) return;
 
-        alert(
-            "Le formulaire d'ajout d'une matière sera ajouté prochainement."
-        );
+    try {
+        await fetch(`${API}/subjects`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ nom, teacher_id: null })
+        });
 
+        await chargerSubjects();
+
+    } catch (err) {
+        console.error("Erreur ajout :", err);
+        alert("Erreur lors de l'ajout.");
     }
-);
+});
 
 
-// ==============================
 // STATISTIQUES
-// ==============================
 
 function mettreAJourStatistiques() {
 
+    document.getElementById("nombre-subjects").textContent = subjects.length;
+    document.getElementById("nombre-enseignees").textContent = subjects.length;
 
-    // Total matières
-
-    document.getElementById(
-        "nombre-subjects"
-    ).textContent =
-        subjects.length;
-
-
-    // Matières enseignées
-
-    document.getElementById(
-        "nombre-enseignees"
-    ).textContent =
-        subjects.length;
-
-
-    // Nombre de professeurs
-
-    const professeurs =
-        new Set(
-            subjects
-                .map(
-                    (subject) =>
-                        subject.professeur
-                )
-                .filter(
-                    (professeur) =>
-                        professeur
-                )
-        );
-
-
-    document.getElementById(
-        "nombre-professeurs"
-    ).textContent =
-        professeurs.size;
-
-}
-
-
-// ==============================
-// UTILISATEUR CONNECTÉ
-// ==============================
-
-const utilisateur =
-    JSON.parse(
-        localStorage.getItem(
-            "utilisateur"
-        )
+    const professeurs = new Set(
+        subjects.map((subject) => subject.teacher_id).filter((id) => id)
     );
 
-
-if (utilisateur) {
-
-    if (utilisateur.nom) {
-
-        document.getElementById(
-            "nom-utilisateur"
-        ).textContent =
-            utilisateur.nom;
-
-    }
-
-
-    if (utilisateur.role) {
-
-        document.getElementById(
-            "role-utilisateur"
-        ).textContent =
-            utilisateur.role;
-
-    }
-
+    document.getElementById("nombre-professeurs").textContent = professeurs.size;
 }
 
 
-// ==============================
+// UTILISATEUR CONNECTÉ
+
+const utilisateur = JSON.parse(localStorage.getItem("utilisateur"));
+
+if (!utilisateur) {
+    window.location.href = "index.html";
+}
+
+document.getElementById("nom-utilisateur").textContent = utilisateur.name;
+document.getElementById("role-utilisateur").textContent = utilisateur.role;
+
+
 // INITIALISATION
-// ==============================
 
-afficherSubjects(subjects);
-
-mettreAJourStatistiques();
+chargerSubjects();

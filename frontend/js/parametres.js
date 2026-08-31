@@ -1,399 +1,174 @@
-// ==============================
-// PAGE PARAMETRES
-// ==============================
+const API = "http://localhost:3000";
 
 
-// ==============================
 // UTILISATEUR CONNECTÉ
-// ==============================
 
-const utilisateur =
-    JSON.parse(
-        localStorage.getItem(
-            "utilisateur"
-        )
-    );
+let utilisateur = JSON.parse(localStorage.getItem("utilisateur"));
 
-
-if (utilisateur) {
-
-    if (utilisateur.nom) {
-
-        document.getElementById(
-            "nom-utilisateur"
-        ).textContent =
-            utilisateur.nom;
-
-    }
-
-
-    if (utilisateur.role) {
-
-        document.getElementById(
-            "role-utilisateur"
-        ).textContent =
-            utilisateur.role;
-
-    }
-
-
-    // ==========================
-    // REMPLIR LE PROFIL
-    // ==========================
-
-    const champNom =
-        document.getElementById(
-            "parametre-nom"
-        );
-
-
-    const champPrenom =
-        document.getElementById(
-            "parametre-prenom"
-        );
-
-
-    const champEmail =
-        document.getElementById(
-            "parametre-email"
-        );
-
-
-    const champTelephone =
-        document.getElementById(
-            "parametre-telephone"
-        );
-
-
-    const champRole =
-        document.getElementById(
-            "parametre-role"
-        );
-
-
-    if (champNom) {
-
-        champNom.value =
-            utilisateur.nom || "";
-
-    }
-
-
-    if (champPrenom) {
-
-        champPrenom.value =
-            utilisateur.prenom || "";
-
-    }
-
-
-    if (champEmail) {
-
-        champEmail.value =
-            utilisateur.email || "";
-
-    }
-
-
-    if (champTelephone) {
-
-        champTelephone.value =
-            utilisateur.telephone || "";
-
-    }
-
-
-    if (champRole) {
-
-        champRole.value =
-            utilisateur.role ||
-            "Administrateur";
-
-    }
-
+if (!utilisateur) {
+    window.location.href = "index.html";
 }
 
+document.getElementById("nom-utilisateur").textContent = utilisateur.name;
+document.getElementById("role-utilisateur").textContent = utilisateur.role;
 
-// ==============================
+
+// REMPLIR LE PROFIL
+
+const champNom = document.getElementById("parametre-nom");
+const champPrenom = document.getElementById("parametre-prenom");
+const champEmail = document.getElementById("parametre-email");
+const champTelephone = document.getElementById("parametre-telephone");
+const champRole = document.getElementById("parametre-role");
+
+champNom.value = utilisateur.name || "";
+champEmail.value = utilisateur.username || "";
+champRole.value = utilisateur.role || "";
+
+
 // CHANGEMENT D'ONGLET
-// ==============================
 
-const onglets =
-    document.querySelectorAll(
-        ".onglet-parametre"
-    );
+const onglets = document.querySelectorAll(".onglet-parametre");
+const sections = document.querySelectorAll(".section-parametre");
 
+onglets.forEach(function (onglet) {
+    onglet.addEventListener("click", function () {
 
-const sections =
-    document.querySelectorAll(
-        ".section-parametre"
-    );
+        onglets.forEach((element) => element.classList.remove("actif"));
+        sections.forEach((section) => section.classList.remove("active"));
 
+        this.classList.add("actif");
 
-onglets.forEach(
-    function (onglet) {
-
-        onglet.addEventListener(
-            "click",
-            function () {
+        const sectionId = this.dataset.section;
+        const section = document.getElementById(sectionId);
+        if (section) section.classList.add("active");
+    });
+});
 
 
-                // ======================
-                // RETIRER ACTIF
-                // ======================
-
-                onglets.forEach(
-                    function (element) {
-
-                        element.classList
-                            .remove(
-                                "actif"
-                            );
-
-                    }
-                );
-
-
-                sections.forEach(
-                    function (section) {
-
-                        section.classList
-                            .remove(
-                                "active"
-                            );
-
-                    }
-                );
-
-
-                // ======================
-                // AJOUTER ACTIF
-                // ======================
-
-                this.classList.add(
-                    "actif"
-                );
-
-
-                const sectionId =
-                    this.dataset.section;
-
-
-                const section =
-                    document.getElementById(
-                        sectionId
-                    );
-
-
-                if (section) {
-
-                    section.classList.add(
-                        "active"
-                    );
-
-                }
-
-            }
-        );
-
-    }
-);
-
-
-// ==============================
 // MODIFICATION DU PROFIL
-// ==============================
 
-const formulaireProfil =
-    document.getElementById(
-        "formulaire-profil"
-    );
+const formulaireProfil = document.getElementById("formulaire-profil");
 
+formulaireProfil.addEventListener("submit", async function (event) {
+    event.preventDefault();
 
-formulaireProfil.addEventListener(
-    "submit",
-    function (event) {
+    const nom = champNom.value.trim();
+    const email = champEmail.value.trim();
 
-        event.preventDefault();
-
-
-        const nom =
-            document.getElementById(
-                "parametre-nom"
-            ).value.trim();
-
-
-        const prenom =
-            document.getElementById(
-                "parametre-prenom"
-            ).value.trim();
-
-
-        const email =
-            document.getElementById(
-                "parametre-email"
-            ).value.trim();
-
-
-        const telephone =
-            document.getElementById(
-                "parametre-telephone"
-            ).value.trim();
-
-
-        const utilisateurModifie = {
-
-            nom: nom,
-
-            prenom: prenom,
-
-            email: email,
-
-            telephone: telephone,
-
-            role:
-                utilisateur?.role ||
-                "Administrateur"
-
-        };
-
-
-        localStorage.setItem(
-            "utilisateur",
-            JSON.stringify(
-                utilisateurModifie
-            )
-        );
-
-
-        document.getElementById(
-            "nom-utilisateur"
-        ).textContent =
-            nom || "Administrateur";
-
-
-        alert(
-            "Les informations du profil ont été enregistrées."
-        );
-
+    if (!nom || !email) {
+        alert("Le nom et l'email sont obligatoires.");
+        return;
     }
-);
+
+    try {
+        const reponse = await fetch(`${API}/users/${utilisateur.id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                name: nom,
+                role: utilisateur.role,
+                username: email,
+                motdepasse: utilisateur.motdepasse
+            })
+        });
+
+        if (!reponse.ok) {
+            alert("Erreur lors de la mise à jour.");
+            return;
+        }
+
+        // Mise à jour locale
+        utilisateur.name = nom;
+        utilisateur.username = email;
+        localStorage.setItem("utilisateur", JSON.stringify(utilisateur));
+
+        document.getElementById("nom-utilisateur").textContent = nom;
+
+        alert("Les informations du profil ont été enregistrées.");
+
+    } catch (err) {
+        console.error(err);
+        alert("Impossible de contacter le serveur.");
+    }
+});
 
 
-// ==============================
 // MODIFICATION MOT DE PASSE
-// ==============================
 
-const formulaireSecurite =
-    document.getElementById(
-        "formulaire-securite"
-    );
+const formulaireSecurite = document.getElementById("formulaire-securite");
 
+formulaireSecurite.addEventListener("submit", async function (event) {
+    event.preventDefault();
 
-formulaireSecurite.addEventListener(
-    "submit",
-    function (event) {
+    const ancien = document.getElementById("ancien-mot-de-passe").value;
+    const nouveau = document.getElementById("nouveau-mot-de-passe").value;
+    const confirmation = document.getElementById("confirmation-nouveau-mot-de-passe").value;
 
-        event.preventDefault();
+    if (!ancien || !nouveau || !confirmation) {
+        alert("Veuillez remplir tous les champs.");
+        return;
+    }
 
+    if (nouveau.length < 6) {
+        alert("Le nouveau mot de passe doit contenir au moins 6 caractères.");
+        return;
+    }
 
-        const ancien =
-            document.getElementById(
-                "ancien-mot-de-passe"
-            ).value;
+    if (nouveau !== confirmation) {
+        alert("Les nouveaux mots de passe ne correspondent pas.");
+        return;
+    }
 
+    // Vérifie l'ancien mot de passe via la route login
+    try {
+        const verifReponse = await fetch(`${API}/users/login`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username: utilisateur.username, motdepasse: ancien })
+        });
 
-        const nouveau =
-            document.getElementById(
-                "nouveau-mot-de-passe"
-            ).value;
-
-
-        const confirmation =
-            document.getElementById(
-                "confirmation-nouveau-mot-de-passe"
-            ).value;
-
-
-        if (
-            !ancien ||
-            !nouveau ||
-            !confirmation
-        ) {
-
-            alert(
-                "Veuillez remplir tous les champs."
-            );
-
+        if (!verifReponse.ok) {
+            alert("L'ancien mot de passe est incorrect.");
             return;
-
         }
 
+        const majReponse = await fetch(`${API}/users/${utilisateur.id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                name: utilisateur.name,
+                role: utilisateur.role,
+                username: utilisateur.username,
+                motdepasse: nouveau
+            })
+        });
 
-        if (
-            nouveau.length < 6
-        ) {
-
-            alert(
-                "Le nouveau mot de passe doit contenir au moins 6 caractères."
-            );
-
+        if (!majReponse.ok) {
+            alert("Erreur lors du changement de mot de passe.");
             return;
-
         }
 
+        utilisateur.motdepasse = nouveau;
+        localStorage.setItem("utilisateur", JSON.stringify(utilisateur));
 
-        if (
-            nouveau !== confirmation
-        ) {
-
-            alert(
-                "Les nouveaux mots de passe ne correspondent pas."
-            );
-
-            return;
-
-        }
-
-
-        alert(
-            "Le mot de passe sera modifié lorsque cette page sera connectée au backend."
-        );
-
-
+        alert("Mot de passe modifié avec succès.");
         formulaireSecurite.reset();
 
+    } catch (err) {
+        console.error(err);
+        alert("Impossible de contacter le serveur.");
     }
-);
+});
 
 
-// ==============================
 // REINITIALISER LES PARAMETRES
-// ==============================
 
-const boutonDanger =
-    document.querySelector(
-        ".bouton-danger"
-    );
+const boutonDanger = document.querySelector(".bouton-danger");
 
-
-boutonDanger.addEventListener(
-    "click",
-    function () {
-
-        const confirmation =
-            confirm(
-                "Voulez-vous vraiment réinitialiser les paramètres ?"
-            );
-
-
-        if (confirmation) {
-
-            alert(
-                "Les paramètres ont été réinitialisés."
-            );
-
-        }
-
+boutonDanger.addEventListener("click", function () {
+    const confirmation = confirm("Voulez-vous vraiment réinitialiser les paramètres ?");
+    if (confirmation) {
+        alert("Les paramètres ont été réinitialisés.");
     }
-);
+});
