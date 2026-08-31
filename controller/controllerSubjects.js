@@ -8,15 +8,15 @@ import {
 } from "../services/servicesSubjects.js";
 
 // Lister toutes les matières
-export function getSubjects(req, res) {
-    const subjects = listerSubjects();
+export async function getSubjects(req, res) {
+    const subjects = await listerSubjects();
     res.json(subjects);
 }
 
 // Récupérer une matière
-export function getSubject(req, res) {
+export async function getSubject(req, res) {
     const id = req.params.id;
-    const subject = rechercherSubjects(id);
+    const subject = await rechercherSubjects(id);
 
     if (!subject) {
         return res.status(404).json({
@@ -28,10 +28,10 @@ export function getSubject(req, res) {
 }
 
 // Ajouter une matière
-export function createSubject(req, res) {
+export async function createSubject(req, res) {
     const { nom, teacher_id } = req.body;
 
-    const result = ajouterSubjects(nom, teacher_id);
+    const result = await ajouterSubjects(nom, teacher_id);
 
     res.status(201).json({
         message: "Matière ajoutée",
@@ -40,11 +40,11 @@ export function createSubject(req, res) {
 }
 
 // Affecter une matière à un professeur
-export function assignSubject(req, res) {
+export async function assignSubject(req, res) {
     const subjectId = req.params.id;
     const { teacher_id } = req.body;
 
-    affecterSubjects(subjectId, teacher_id);
+    await affecterSubjects(subjectId, teacher_id);
 
     res.json({
         message: "Professeur affecté à la matière"
@@ -52,11 +52,11 @@ export function assignSubject(req, res) {
 }
 
 // Modifier une matière
-export function updateSubject(req, res) {
+export async function updateSubject(req, res) {
     const id = req.params.id;
     const { nom, teacher_id } = req.body;
 
-    modifierSubjects(id, nom, teacher_id);
+    await modifierSubjects(id, nom, teacher_id);
 
     res.json({
         message: "Matière modifiée"
@@ -64,10 +64,10 @@ export function updateSubject(req, res) {
 }
 
 // Supprimer une matière
-export function deleteSubject(req, res) {
+export async function deleteSubject(req, res) {
     const id = req.params.id;
 
-    supprimerSubjects(id);
+    await supprimerSubjects(id);
 
     res.json({
         message: "Matière supprimée"

@@ -7,36 +7,26 @@ import {
     connecterUsers
 } from "../services/servicesUsers.js";
 
-// Lister tous les utilisateurs
-export function getUsers(req, res) {
-    const users = listerUsers();
+export async function getUsers(req, res) {
+    const users = await listerUsers();
     res.json(users);
 }
 
-// Récupérer un utilisateur
-export function getUser(req, res) {
+export async function getUser(req, res) {
     const id = req.params.id;
-    const user = rechercherUsers(id);
+    const user = await rechercherUsers(id);
 
     if (!user) {
-        return res.status(404).json({
-            message: "Utilisateur introuvable"
-        });
+        return res.status(404).json({ message: "Utilisateur introuvable" });
     }
 
     res.json(user);
 }
 
-// Ajouter un utilisateur
-export function createUser(req, res) {
+export async function createUser(req, res) {
     const { name, role, username, motdepasse } = req.body;
 
-    const result = ajouterUsers(
-        name,
-        role,
-        username,
-        motdepasse
-    );
+    const result = await ajouterUsers(name, role, username, motdepasse);
 
     res.status(201).json({
         message: "Utilisateur ajouté",
@@ -44,50 +34,31 @@ export function createUser(req, res) {
     });
 }
 
-// Modifier un utilisateur
-export function updateUser(req, res) {
+export async function updateUser(req, res) {
     const id = req.params.id;
     const data = req.body;
 
-    modifierUsers(id, data);
+    await modifierUsers(id, data);
 
-    res.json({
-        message: "Utilisateur modifié"
-    });
+    res.json({ message: "Utilisateur modifié" });
 }
 
-// Supprimer un utilisateur
-export function deleteUser(req, res) {
+export async function deleteUser(req, res) {
     const id = req.params.id;
 
-    supprimerUsers(id);
+    await supprimerUsers(id);
 
-    res.json({
-        message: "Utilisateur supprimé"
-    });
+    res.json({ message: "Utilisateur supprimé" });
 }
 
-// Connecter un utilisateur
-export function loginUser(req, res) {
+export async function loginUser(req, res) {
+    const { username, motdepasse } = req.body;
 
-    const {
-        username,
-        motdepasse,
-    } = req.body;
-
-    const user = connecterUsers(
-        username,
-        motdepasse,
-    );
+    const user = await connecterUsers(username, motdepasse);
 
     if (!user) {
-        return res.status(401).json({
-            message: "Identifiant ou mot de passe incorrect."
-        });
+        return res.status(401).json({ message: "Identifiant ou mot de passe incorrect." });
     }
 
-    res.json({
-        message: "Connexion réussie",
-        user
-    });
+    res.json({ message: "Connexion réussie", user });
 }

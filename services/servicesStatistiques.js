@@ -1,58 +1,51 @@
 import db from "../db/database.js";
 
-// Moyenne générale d'un étudiant
-function moyenneEtudiant(student_id) {
-    return db.prepare(`
-        SELECT AVG(note) AS moyenne
-        FROM grades
-        WHERE student_id = ?
-    `).get(student_id);
+async function moyenneEtudiant(student_id) {
+    const stmt = await db.prepare(`SELECT AVG(note) AS moyenne FROM grades WHERE student_id = ?`);
+    return await stmt.get([student_id]);
 }
 
-// Moyenne générale de toutes les notes
-function moyenneGenerale() {
-    return db.prepare(`
-        SELECT AVG(note) AS moyenne
-        FROM grades
-    `).get();
+async function moyenneGenerale() {
+    const stmt = await db.prepare(`SELECT AVG(note) AS moyenne FROM grades`);
+    return await stmt.get([]);
 }
 
-// Moyenne par matière pour un étudiant
-function moyenneParMatiere(student_id) {
-    return db.prepare(`
+async function moyenneParMatiere(student_id) {
+    const stmt = await db.prepare(`
         SELECT subjects.nom, AVG(grades.note) AS moyenne
         FROM grades
         JOIN subjects ON grades.subject_id = subjects.id
         WHERE grades.student_id = ?
         GROUP BY grades.subject_id
-    `).all(student_id);
+    `);
+    return await stmt.all([student_id]);
 }
 
-// Nombre d'absences d'un étudiant
-function compterAbsencesEtudiant(student_id) {
-    return db.prepare(`
-        SELECT COUNT(*) AS total_absences
-        FROM absences
-        WHERE student_id = ?
-    `).get(student_id);
+async function compterAbsencesEtudiant(student_id) {
+    const stmt = await db.prepare(`SELECT COUNT(*) AS total_absences FROM absences WHERE student_id = ?`);
+    return await stmt.get([student_id]);
 }
 
-// Classement des étudiants par moyenne
-function classementEtudiants() {
-    return db.prepare(`
+async function classementEtudiants() {
+    const stmt = await db.prepare(`
         SELECT students.nom, students.prenom, AVG(grades.note) AS moyenne
         FROM grades
         JOIN students ON grades.student_id = students.id
         GROUP BY grades.student_id
         ORDER BY moyenne DESC
-    `).all();
+    `);
+    return await stmt.all([]);
 }
 
-// Statistiques globales (nb étudiants, enseignants, matières)
-function statsGlobales() {
-    const nbEtudiants = db.prepare(`SELECT COUNT(*) AS total FROM students`).get();
-    const nbEnseignants = db.prepare(`SELECT COUNT(*) AS total FROM teachers`).get();
-    const nbMatieres = db.prepare(`SELECT COUNT(*) AS total FROM subjects`).get();
+async function statsGlobales() {
+    const stmtEtudiants = await db.prepare(`SELECT COUNT(*) AS total FROM students`);
+    const nbEtudiants = await stmtEtudiants.get();
+
+    const stmtEnseignants = await db.prepare(`SELECT COUNT(*) AS total FROM teachers`);
+    const nbEnseignants = await stmtEnseignants.get();
+
+    const stmtMatieres = await db.prepare(`SELECT COUNT(*) AS total FROM subjects`);
+    const nbMatieres = await stmtMatieres.get();
 
     return {
         etudiants: nbEtudiants.total,

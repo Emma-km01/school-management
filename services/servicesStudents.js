@@ -1,38 +1,36 @@
 import db from "../db/database.js";
 import Students from "../models/modelsStudents.js";
 
-function ajouterStudents(matricule, nom, prenom, age, classe, user_id = null) {
+async function ajouterStudents(matricule, nom, prenom, age, classe, user_id = null) {
     const addStudents = new Students(matricule, nom, prenom, age, classe, user_id);
-
-    return db.prepare(`
+    const stmt = await db.prepare(`
         INSERT OR IGNORE INTO students(matricule, nom, prenom, age, classe, user_id)
         VALUES (?, ?, ?, ?, ?, ?)
-    `).run(addStudents.matricule, addStudents.nom, addStudents.prenom, addStudents.age, addStudents.classe, addStudents.user_id);
+    `);
+    return await stmt.run([addStudents.matricule, addStudents.nom, addStudents.prenom, addStudents.age, addStudents.classe, addStudents.user_id]);
 }
 
-function modifierStudents(id, data) {
-    return db.prepare(`
+async function modifierStudents(id, data) {
+    const stmt = await db.prepare(`
         UPDATE students SET matricule = ?, nom = ?, prenom = ?, age = ?, classe = ?
         WHERE id = ?
-    `).run(data.matricule, data.nom, data.prenom, data.age, data.classe, id); // WHERE id = ? ajouté
+    `);
+    return await stmt.run([data.matricule, data.nom, data.prenom, data.age, data.classe, id]);
 }
 
-function supprimerStudents(id) {
-    return db.prepare(`
-        DELETE FROM students WHERE id = ?
-    `).run(id);
+async function supprimerStudents(id) {
+    const stmt = await db.prepare(`DELETE FROM students WHERE id = ?`);
+    return await stmt.run([id]);
 }
 
-function rechercherStudents(id) {
-    return db.prepare(`
-        SELECT * FROM students WHERE id = ?
-    `).get(id);
+async function rechercherStudents(id) {
+    const stmt = await db.prepare(`SELECT * FROM students WHERE id = ?`);
+    return await stmt.get([id]);
 }
 
-function listerStudents() {
-    return db.prepare(`
-        SELECT * FROM students
-    `).all();
+async function listerStudents() {
+    const stmt = await db.prepare(`SELECT * FROM students`);
+    return await stmt.all([]);
 }
 
 export { ajouterStudents, modifierStudents, supprimerStudents, rechercherStudents, listerStudents };

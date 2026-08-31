@@ -6,44 +6,34 @@ import {
     supprimerTeachers
 } from "../services/servicesTeachers.js";
 
-export function getTeachers(req, res) {
-    const teachers = listerTeachers();
+export async function getTeachers(req, res) {
+    const teachers = await listerTeachers();
     res.json(teachers);
 }
 
-export function getTeacher(req, res) {
+export async function getTeacher(req, res) {
     const id = req.params.id;
-    const teacher = rechercherTeachers(id);
+    const teacher = await rechercherTeachers(id);
     res.json(teacher);
 }
 
-export function createTeacher(req, res) {
+export async function createTeacher(req, res) {
     const { nom, matiere, user_id } = req.body;
-
-    const teacher = ajouterTeachers(nom, matiere, user_id);
-
+    const teacher = await ajouterTeachers(nom, matiere, user_id);
     res.json(teacher);
 }
 
-export function updateTeacher(req, res) {
+export async function updateTeacher(req, res) {
     const id = req.params.id;
-
     const { nom, matiere } = req.body;
+    const data = { nom, matiere };
 
-    const data = {
-        nom,
-        matiere
-    };
-
-    const teacher = modifierTeachers(id, data);
-
+    const teacher = await modifierTeachers(id, data);
     res.json(teacher);
 }
 
-export function deleteTeacher(req, res) {
+export async function deleteTeacher(req, res) {
     const id = req.params.id;
-
-    const teacher = supprimerTeachers(id);
-
+    const teacher = await supprimerTeachers(id);
     res.json(teacher);
 }

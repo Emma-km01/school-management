@@ -1,43 +1,38 @@
 import db from "../db/database.js";
 import Subjects from "../models/modelsSubjects.js";
 
-function ajouterSubjects(nom, teacher_id = null) {
+async function ajouterSubjects(nom, teacher_id = null) {
     const addSubjects = new Subjects(nom, teacher_id);
-
-    return db.prepare(`
+    const stmt = await db.prepare(`
         INSERT OR IGNORE INTO subjects(nom, teacher_id)
         VALUES (?, ?)
-    `).run(addSubjects.nom, addSubjects.teacher_id); // teacher_id et non teacherId
+    `);
+    return await stmt.run([addSubjects.nom, addSubjects.teacher_id]);
 }
 
-function affecterSubjects(subjectId, teacherId) {
-    return db.prepare(`
-        UPDATE subjects SET teacher_id = ? WHERE id = ?
-    `).run(teacherId, subjectId);
+async function affecterSubjects(subjectId, teacherId) {
+    const stmt = await db.prepare(`UPDATE subjects SET teacher_id = ? WHERE id = ?`);
+    return await stmt.run([teacherId, subjectId]);
 }
 
-function modifierSubjects(id, nouveauNom, teacher_id) {
-    return db.prepare(`
-        UPDATE subjects SET nom = ?, teacher_id = ? WHERE id = ?
-    `).run(nouveauNom, teacher_id, id);
+async function modifierSubjects(id, nouveauNom, teacher_id) {
+    const stmt = await db.prepare(`UPDATE subjects SET nom = ?, teacher_id = ? WHERE id = ?`);
+    return await stmt.run([nouveauNom, teacher_id, id]);
 }
 
-function supprimerSubjects(id) {
-    return db.prepare(`
-        DELETE FROM subjects WHERE id = ?
-    `).run(id);
+async function supprimerSubjects(id) {
+    const stmt = await db.prepare(`DELETE FROM subjects WHERE id = ?`);
+    return await stmt.run([id]);
 }
 
-function listerSubjects() {
-    return db.prepare(`
-        SELECT * FROM subjects 
-    `).all();
+async function listerSubjects() {
+    const stmt = await db.prepare(`SELECT * FROM subjects`);
+    return await stmt.all([]);
 }
 
-function rechercherSubjects(id) {
-    return db.prepare(`
-        SELECT * FROM subjects WHERE id = ?
-    `).get(id);
+async function rechercherSubjects(id) {
+    const stmt = await db.prepare(`SELECT * FROM subjects WHERE id = ?`);
+    return await stmt.get([id]);
 }
 
 export { ajouterSubjects, affecterSubjects, modifierSubjects, supprimerSubjects, listerSubjects, rechercherSubjects };

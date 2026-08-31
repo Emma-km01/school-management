@@ -1,38 +1,36 @@
 import db from "../db/database.js";
 import Teachers from "../models/modelsTeachers.js";
 
-function ajouterTeachers(nom, matiere, user_id = null) {
+async function ajouterTeachers(nom, matiere, user_id = null) {
     const addTeachers = new Teachers(nom, matiere, user_id);
-
-    return db.prepare(`
+    const stmt = await db.prepare(`
         INSERT OR IGNORE INTO teachers(nom, matiere, user_id)
         VALUES (?, ?, ?)
-    `).run(addTeachers.nom, addTeachers.matiere, addTeachers.user_id);
+    `);
+    return await stmt.run([addTeachers.nom, addTeachers.matiere, addTeachers.user_id]);
 }
 
-function modifierTeachers(id, data) {
-    return db.prepare(`
+async function modifierTeachers(id, data) {
+    const stmt = await db.prepare(`
         UPDATE teachers SET nom = ?, matiere = ?
         WHERE id = ?
-    `).run(data.nom, data.matiere, id); // WHERE id = ? ajouté
+    `);
+    return await stmt.run([data.nom, data.matiere, id]);
 }
 
-function supprimerTeachers(id) {
-    return db.prepare(`
-        DELETE FROM teachers WHERE id = ?
-    `).run(id);
+async function supprimerTeachers(id) {
+    const stmt = await db.prepare(`DELETE FROM teachers WHERE id = ?`);
+    return await stmt.run([id]);
 }
 
-function rechercherTeachers(id) {
-    return db.prepare(`
-        SELECT * FROM teachers WHERE id = ?
-    `).get(id);
+async function rechercherTeachers(id) {
+    const stmt = await db.prepare(`SELECT * FROM teachers WHERE id = ?`);
+    return await stmt.get([id]);
 }
 
-function listerTeachers() {
-    return db.prepare(`
-        SELECT * FROM teachers
-    `).all();
+async function listerTeachers() {
+    const stmt = await db.prepare(`SELECT * FROM teachers`);
+    return await stmt.all([]);
 }
 
 export { ajouterTeachers, modifierTeachers, supprimerTeachers, rechercherTeachers, listerTeachers };
