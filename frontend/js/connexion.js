@@ -8,7 +8,7 @@ formulaire.addEventListener("submit", async (e) => {
     const motDePasse = document.getElementById("motDePasse").value;
 
     try {
-        const reponse = await fetch("http://localhost:3000/users/login", {
+        const reponse = await fetch("https://school-management-rtbo.onrender.com/users/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

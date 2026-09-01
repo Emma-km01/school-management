@@ -1,4 +1,4 @@
-const API = "http://localhost:3000";
+const API = "https://school-management-rtbo.onrender.com";
 
 let teachers = [];
 
